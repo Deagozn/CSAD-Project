@@ -1,0 +1,113 @@
+.navbar {
+    z-index: 5;
+    width: 100%;
+    max-width: 100%;
+    background-color: rbga(0,0,0,0);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: white;
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 100%;
+}
+
+.container {
+    width: 100%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-wrapper {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+}
+
+.navbar-brand {
+    z-index: 10;
+    position: absolute;
+}
+
+.logo {
+    width: 15%;
+    height: auto;
+    display: block;
+    margin-left: 50%;
+    margin-right: auto;
+}
+
+.nav-menu-wrapper {
+    width: 100%;
+}
+
+.nav-menu {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+    display: flex;
+}
+
+.nav-menu-list {
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 0;
+    display: flex;
+    list-style-type: none;
+}
+
+.nav-link {
+    color: #1a1b1f;
+    letter-spacing: .25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 20px;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: #0050bd;
+}
+
+.nav-link:focus-visible {
+    outline-offset: 0px;
+    color: #0050bd;
+    border-radius: 4px;
+    outline: 2px solid #0050bd;
+}
+
+.nav-link[data-wf-focus-visible] {
+    outline-offset: 0px;
+    color: #0050bd;
+    border-radius: 4px;
+    outline: 2px solid #0050bd;
+}
+
+.mobile-margin-top-10 {
+    margin-top: 10px;
+}
+
+.login {
+  background-color: #0050bd;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 15px; 
+}
+
+body {
+    background-image: url(Resources/book-background.png);
+}
