@@ -1,17 +1,17 @@
 .navbar {
     z-index: 5;
     width: 100%;
-    max-width: 100%;
-    background-color: rbga(0,0,0,0);
+    max-width: 97.4%;
+    background-color: white;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
-    background-color: white;
 }
 
 .navbar-container {
     width: 100%;
     max-width: 100%;
+    margin: 0;
 }
 
 .container {
@@ -110,4 +110,5 @@
 
 body {
     background-image: url(Resources/book-background.png);
+    margin: 0;
 }
