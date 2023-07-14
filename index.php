@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
+<nav class="bg-gray-200 border-blue-200 dark:bg-gray-900" style=" box-shadow: 0 0 0 1px blue;">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="#" class="flex items-center">
         <img src="Resources/logo-no-background.png" class="h-20 mr-5" alt="Kiasu Library Logo" />
