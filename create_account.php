@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE h
 <html lang="en">
 <head>
   <title>Bootstrap Example</title>
@@ -11,24 +11,33 @@
   
   <div class="max-w-md w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
     <img src="Resources/logo-no-background.png" class="h-20 mr-5" alt="Kiasu Library Logo" style="margin-bottom: 30px; margin-left: 30%; width: 50%; height: auto"/>
-    <h1 class="text-3xl font-semibold mb-6">Welcome Back :)</h1>
+    <h1 class="text-3xl font-semibold mb-6">Create Your Account</h1>
     <form>
+      <div class="mb-6">
+        <label for="name" class="block text-gray-700 font-medium">Name</label>
+        <input type="text" id="name" class="form-input mt-1 block w-full" placeholder="Enter your name" required>
+      </div>
       <div class="mb-6">
         <label for="email" class="block text-gray-700 font-medium">Email</label>
         <input type="email" id="email" class="form-input mt-1 block w-full" placeholder="Enter your email" required>
       </div>
       <div class="mb-6">
+        <label for="phone_number" class="block text-gray-700 font-medium">Phone Number</label>
+        <input type="number" id="phone_number" class="form-input mt-1 block w-full" placeholder="Enter your phone number" required>
+      </div>
+      <div class="mb-6">
         <label for="password" class="block text-gray-700 font-medium">Password</label>
         <input type="password" id="password" class="form-input mt-1 block w-full" placeholder="Enter your password" required>
       </div>
-      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded">LOGIN</button>
+      <div class="mb-6">
+        <label for="cfm_password" class="block text-gray-700 font-medium">Confirm Password</label>
+        <input type="password" id="cfm_password" class="form-input mt-1 block w-full" placeholder="Re-enter your password" required>
+      </div>
+      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded">Create Account</button>
     </form>
-    <div class="mt-4 text-center">
-      <a href="create_account.php" class="text-blue-500 hover:text-blue-700 text-sm">Create Account</a>
-      <span class="text-gray-500 mx-2">|</span>
-      <a href="#" class="text-blue-500 hover:text-blue-700 text-sm">Forgot Password</a>
-    </div>
   </div>
 
 </body>
 </html>
+
+
