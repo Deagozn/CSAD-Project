@@ -79,6 +79,18 @@
   </div>
     
 </div>
+<script type="module" src="http://localhost/Project/feedback.js"/>    
+<script>
+    function getSelected(){
+        selectElement = document.querySelector('#feedback_type');
+        output = selectElement.value;
+        console.log(output)
+        return output;
+        
+
+    }
+    
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
 <script>
