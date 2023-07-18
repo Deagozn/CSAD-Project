@@ -9,6 +9,7 @@
 
 </head>
 <body class="bg-auto bg-repeat " style="background-image: url('Resources/book-background.png')">
+    
 
 <nav class="sticky top-0 bg-indigo-100 border-blue-200 dark:bg-gray-900" style=" box-shadow: 0 0 0 1px #86b9f7;">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -45,7 +46,7 @@
 <div class="flex items-center justify-center h-screen">
     <div class="max-w-md w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
     <h1 class="text-3xl font-semibold mb-6">Feedback</h1>
-    <form>
+    <form id="feedback_form">
       <div class="mb-6">
         <label for="feedback_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Feedback Type</label>
         <select id="feedback_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
@@ -68,29 +69,18 @@
                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"><span class="font-semibold">Click to upload </span><span class="font-bold">one</span> image to support your feedback/report</p>
                     <p class="text-xs text-gray-500 dark:text-gray-400">PNG or JPG (MAX. 800x400px)</p>
                   </div>
-                  <input id="dropzone-file" type="file" class="hidden" onchange="displayFileNames(this)" multiple />
+                  <input id="dropzone-file" type="file" class="hidden" onchange="displayFileNames(this)"/>
                   <p id="file-names" class="text-sm text-gray-600 mt-2"></p>
                 </label>
             </div>
-        </div>
-        
-      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded">SUBMIT</button>
+        </div> 
+      <button type="submit" id="submit_btn" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded">SUBMIT</button>
     </form>
   </div>
-    
 </div>
-<script type="module" src="http://localhost/Project/feedback.js"/>    
-<script>
-    function getSelected(){
-        selectElement = document.querySelector('#feedback_type');
-        output = selectElement.value;
-        console.log(output)
-        return output;
-        
+  
+<script type="module" src="./feedback.js" ></script>
 
-    }
-    
-</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
 <script>
