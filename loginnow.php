@@ -19,7 +19,7 @@ if($email == false){
 <body class="bg-auto bg-repeat flex items-center justify-center" style="background-image: url('Resources/book-background.png'); height: auto">
   
   <div class="max-w-md w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8 ">
-    <img src="Resources/logo-no-background.png" class="h-20 mr-5" alt="Kiasu Library Logo" style=" margin-bottom: 5%; margin-left: 30%; width: 50%; height: auto;"/>
+    <img src="Resources/bluecheckicon.png" class="h-20 " alt="Blue Check Icon" style=" margin-bottom: 5%; margin-left: auto; margin-right: auto; width: 50%; height: auto;"/>
     <h1 class="text-3xl font-semibold mb-6">Login Now</h1>
     <form action="loginnow.php" method="POST">
         <?php 
