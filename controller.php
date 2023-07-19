@@ -32,6 +32,7 @@ if(isset($_POST['create_account'])){
             $subject = "Email Verification Code";
             $message = "Your verification code is $code";
             $sender = "From: NoReply.KiasuLibrary@gmail.com";
+            //Php code to send email
             if(mail($email, $subject, $message, $sender)){
                 $info = "We've sent a verification code to your email - $email";
                 $_SESSION['info'] = $info;
