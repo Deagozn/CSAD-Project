@@ -66,7 +66,7 @@ if(isset($_POST['create_account'])){
             if($update_res){
                 $_SESSION['name'] = $name;
                 $_SESSION['email'] = $email;
-                header('location: home.php');
+                header('location: homeloggedin.php');
                 exit();
             }else{
                 $errors['otp-error'] = "Failed while updating code!";

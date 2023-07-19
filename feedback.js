@@ -27,60 +27,62 @@ async function handleFormSubmit(event) {
   const fileInput = document.getElementById('dropzone-file');
   const file = fileInput.files[0];
 
-  if (file && file.type.startsWith('image/')) {
-    try {
-      const imageData = await readFileAsDataURL(file);
-      const bitmap = await createImageBitmap(file);
-      // Use the 'bitmap' and 'imageData' as needed in your code
-      // For example, you can store the 'imageData' in Firestore along with the feedback data
+  try {
+    let imageData = null;
+    let bitmap = null;
 
-      switch (type) {
-        case 'BUG':
-          try {
-            const docRef = await addDoc(collection(db, 'feedback_bug'), {
-              description: desc,
-              imageData: imageData,
-            });
-            console.log('Document written with ID:', docRef.id);
-          } catch (error) {
-            console.error('Error adding document:', error);
-          }
-          break;
-
-        case 'FEEDBACK':
-          try {
-            const docRef = await addDoc(collection(db, 'feedback_feedback'), {
-              description: desc,
-              imageData: imageData,
-            });
-            console.log('Document written with ID:', docRef.id);
-          } catch (error) {
-            console.error('Error adding document:', error);
-          }
-          break;
-
-        case 'OTHERS':
-          try {
-            const docRef = await addDoc(collection(db, 'feedback_others'), {
-              description: desc,
-              imageData: imageData,
-            });
-            console.log('Document written with ID:', docRef.id);
-          } catch (error) {
-            console.error('Error adding document:', error);
-          }
-          break;
-
-        default:
-          console.log('Invalid feedback type');
-          break;
-      }
-    } catch (error) {
-      console.error('Error converting image to Bitmap:', error);
+    if (file && file.type.startsWith('image/')) {
+      imageData = await readFileAsDataURL(file);
+      bitmap = await createImageBitmap(file);
     }
-  } else {
-    console.log('Invalid image file');
+
+    switch (type) {
+      case 'BUG':
+        try {
+          const docRef = await addDoc(collection(db, 'feedback_bug'), {
+            description: desc,
+            imageData: imageData,
+          });
+          console.log('Document written with ID:', docRef.id);
+        } catch (error) {
+          console.error('Error adding document:', error);
+        }
+        break;
+
+      case 'FEEDBACK':
+        try {
+          const docRef = await addDoc(collection(db, 'feedback_feedback'), {
+            description: desc,
+            imageData: imageData,
+          });
+          console.log('Document written with ID:', docRef.id);
+        } catch (error) {
+          console.error('Error adding document:', error);
+        }
+        break;
+
+      case 'OTHERS':
+        try {
+          const docRef = await addDoc(collection(db, 'feedback_others'), {
+            description: desc,
+            imageData: imageData,
+          });
+          console.log('Document written with ID:', docRef.id);
+        } catch (error) {
+          console.error('Error adding document:', error);
+        }
+        break;
+
+      default:
+        console.log('Invalid feedback type');
+        break;
+    }
+  } catch (error) {
+    console.error('Error:', error);
   }
+
+  window.alert("Your feedback has been uploaded successfully.");
+  location.reload();
 }
 
 function readFileAsDataURL(file) {
