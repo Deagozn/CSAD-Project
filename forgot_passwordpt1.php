@@ -14,12 +14,12 @@
     <img src="Resources/logo-no-background.png" class="h-20 mr-5" alt="Kiasu Library Logo" style="margin-bottom: 30px; margin-left: 30%; width: 50%; height: auto"/>
     <h1 class="text-3xl font-semibold mb-6 items-center">Forgot Password</h1>
     <h3 class="text-l mb-10">Please Enter Email for Verification</h3>
-    <form>
+    <form action="forgot_passwordpt1.php" method="POST" autocomplete="">
       <div class="mb-6">
         <label for="email" class="block text-gray-700 font-medium">Email</label>
-        <input type="email" id="email" class="form-input mt-1 block w-full" placeholder="Enter your email" required>
+        <input type="email" id="email" name="email" class="form-input mt-1 block w-full" placeholder="Enter your email" required>
       </div>
-        <input class="form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded" type="submit" value="VERIFY">
+        <input class="form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded" type="submit" name="check_email" value="VERIFY">
     </form>
     <div class="mt-4 text-center">
       <a href="login.php" class="text-blue-500 hover:text-blue-700 text-sm underline">BACK TO LOGIN</a>

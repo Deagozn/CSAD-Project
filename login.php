@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Tailwind CSS CDN link -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
+  <link a href="style.css" rel="stylesheet"/>
 </head>
 <body class="bg-auto bg-repeat flex items-center justify-center h-screen" style="background-image: url('Resources/book-background.png')">
   
@@ -29,14 +30,13 @@
                     ?>
       <div class="mb-6">
         <label for="email" class="block text-gray-700 font-medium">Email</label>
-        <input type="email" id="email" class="form-input mt-1 block w-full" placeholder="Enter your email" required>
+        <input type="email" id="email" name="email" class="form-input mt-1 block w-full" placeholder="Enter your email" required>
       </div>
       <div class="mb-6">
         <label for="password" class="block text-gray-700 font-medium">Password</label>
-        <input type="password" id="password" class="form-input mt-1 block w-full" placeholder="Enter your password" required>
+        <input type="password" id="password" name="password" class="form-input mt-1 block w-full" placeholder="Enter your password" required>
       </div>
-      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded">LOGIN</button>
-    </form>
+      <input type="submit" class="form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded" name="login" value="LOGIN"/>
     <div class="mt-4 text-center">
       <a href="create_account.php" class="text-blue-500 hover:text-blue-700 text-sm">Create Account</a>
       <span class="text-gray-500 mx-2">|</span>

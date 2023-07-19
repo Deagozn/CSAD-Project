@@ -6,7 +6,7 @@ $name = "";
 $errors = array();
 
 //if user signup button
-if(isset($_POST['signup'])){
+if(isset($_POST['create_account'])){
     $name = mysqli_real_escape_string($con, $_POST['name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $phone_number=mysqli_real_escape_string($con,$_POST['phone_number']);
@@ -90,7 +90,7 @@ if(isset($_POST['signup'])){
                 if($status == 'verified'){
                   $_SESSION['email'] = $email;
                   $_SESSION['password'] = $password;
-                    header('location: home.php');
+                    header('location: homeloggedin.php');
                 }else{
                     $info = "It's look like you haven't still verify your email - $email";
                     $_SESSION['info'] = $info;
@@ -105,7 +105,7 @@ if(isset($_POST['signup'])){
     }
 
     //if user click continue button in forgot password form
-    if(isset($_POST['check-email'])){
+    if(isset($_POST['check_email'])){
         $email = mysqli_real_escape_string($con, $_POST['email']);
         $check_email = "SELECT * FROM usertable WHERE email='$email'";
         $run_sql = mysqli_query($con, $check_email);
@@ -121,7 +121,7 @@ if(isset($_POST['signup'])){
                     $info = "We've sent a passwrod reset otp to your email - $email";
                     $_SESSION['info'] = $info;
                     $_SESSION['email'] = $email;
-                    header('location: reset-code.php');
+                    header('location: resetpasswordotp.php');
                     exit();
                 }else{
                     $errors['otp-error'] = "Failed while sending code!";
@@ -146,7 +146,7 @@ if(isset($_POST['signup'])){
             $_SESSION['email'] = $email;
             $info = "Please create a new password that you don't use on any other site.";
             $_SESSION['info'] = $info;
-            header('location: new-password.php');
+            header('location: forgot_passwordpt2.php');
             exit();
         }else{
             $errors['otp-error'] = "You've entered incorrect code!";
@@ -154,10 +154,10 @@ if(isset($_POST['signup'])){
     }
 
     //if user click change password button
-    if(isset($_POST['change-password'])){
+    if(isset($_POST['change_password'])){
         $_SESSION['info'] = "";
         $password = mysqli_real_escape_string($con, $_POST['password']);
-        $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
+        $cpassword = mysqli_real_escape_string($con, $_POST['cfm_password']);
         if($password !== $cpassword){
             $errors['password'] = "Confirm password not matched!";
         }else{
@@ -169,7 +169,7 @@ if(isset($_POST['signup'])){
             if($run_query){
                 $info = "Your password changed. Now you can login with your new password.";
                 $_SESSION['info'] = $info;
-                header('Location: password-changed.php');
+                header('Location: loginnow.php');
             }else{
                 $errors['db-error'] = "Failed to change your password!";
             }
@@ -177,7 +177,7 @@ if(isset($_POST['signup'])){
     }
     
    //if login now button click
-    if(isset($_POST['login-now'])){
+    if(isset($_POST['loginnow'])){
         header('Location: login.php');
     }
 ?>
