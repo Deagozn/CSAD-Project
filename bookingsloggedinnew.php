@@ -21,6 +21,44 @@ if($email != false && $password != false){
     header('Location: login.php');
 }
 ?>
+
+<?php
+
+    function console_log($data) {
+    echo '<script>';
+    echo 'console.log(' . json_encode($data) . ')';
+    echo '</script>';
+}
+
+   $servername2 = "localhost";
+   $username2 = "root";
+   $password2 = "";
+   $dbname2 = "booklist";
+     
+   // connect the database with the server
+   $conn2 = new mysqli($servername2,$username2,$password2,$dbname2);
+     
+    // if error occurs 
+    if ($conn2 -> connect_errno)
+    {
+       $errorMsg = "Failed to connect to MySQL: " . $conn->connect_error;
+       console_log($errorMsg);
+       exit();
+    }
+  
+    $sql2 = "select * from booktable";
+    $result2 = ($conn2->query($sql2));
+    //declare array to store the data of database
+    $row2 = []; 
+  
+    if ($result2->num_rows > 0) 
+    {
+        // fetch all data from db into array 
+        $row2 = $result2->fetch_all(MYSQLI_ASSOC);  
+    }   
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,22 +138,20 @@ if($email != false && $password != false){
         <div class="mb-6">
             
         <label for="books" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Books</label>
-        <datalist id="books" name="books" >
-        <option>No Book Selected</option>
-        <option>Harry Potter and the Goblet of Fire 
-                (Rowling, J. K.)</option>
-        <option>Verity 
-                (Colleen Hoover)</option>
-        <option>19th Christmas 
-                (Patterson, James, 1947-2019)</option>
-        <option>Harry Potter knitting magic : the official Harry Potter knitting pattern book
-                (Gray, Tanis 2020)</option>
-        <option>Harry potter : Cinematic Guide
-                (Baker, Felicity 2016)</option>
-        <option>Harry potter and the philosopher's stone [electronic resource] : Harry Potter Series, Book 1
-                (Rowling, J. K. 2012)</option>
-        
-        </datalist>
+        <?php
+        if (!empty($row2)) {
+            ?>
+            <datalist id="books" name="books">
+            <option>No Book Selected</option>
+            <?php
+            foreach ($row2 as $rows2) {
+                echo '<option>' . htmlspecialchars($rows2['name']) . '</option>';
+            }
+            ?>
+            </datalist>
+        <?php
+        }
+        ?>
         
         <input placeholder="No Books Selected" name="bookselected" value="<?php if(isset($_POST['bookselected'])){$book=$_POST['bookselected']; echo $book;} ?>" autoComplete="on" list="books" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/> 
         
