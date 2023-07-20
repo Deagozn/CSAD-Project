@@ -44,7 +44,75 @@
   </div>
 </nav>
 <div>
-    
+    <div id="googleMap" class="mt-4" style="margin-left: auto;margin-right: auto; height:500px; width:85%;"></div>
+
+<script>
+  function initMap() {
+    const JRL = { lat: 1.3331318186552286, lng: 103.73952682201035 };
+    const QPL = { lat: 1.2989587537978944, lng: 103.80523734215485 };
+    const TRL = { lat: 1.352444742798928, lng: 103.94119518645469 };
+    const BPL = { lat: 1.3270474451349594, lng: 103.93172288646228 };
+    const map = new google.maps.Map(document.getElementById("googleMap"), {
+      zoom: 15,
+      center: JRL,
+    });
+
+    new google.maps.Marker({
+      position: JRL,
+      map,
+      title: "Jurong Regional Library",
+    });
+
+    new google.maps.Marker({
+      position: QPL,
+      map,
+      title: "Queenstown Public Library",
+    });
+
+    new google.maps.Marker({
+      position: TRL,
+      map,
+      title: "Tampines Regional Library",
+    });
+
+    new google.maps.Marker({
+      position: BPL,
+      map,
+      title: "Bedok Public Library",
+    });
+
+    // Get user's location and mark it with a different marker
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          const userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          new google.maps.Marker({
+            position: userLocation,
+            map,
+            title: "Your location",
+            icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Use a blue dot icon for user location
+          });
+
+          // Center the map on the user's location
+          map.setCenter(userLocation);
+        },
+        function (error) {
+          console.error("Error getting user's location:", error);
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }
+</script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCytg2BFv065zbiXN0sjsDtHAeTX2KrkVA&callback=initMap&v=weekly"
+      defer
+    ></script>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
