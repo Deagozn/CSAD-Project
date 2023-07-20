@@ -110,7 +110,7 @@
   }
 </script>
 <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCytg2BFv065zbiXN0sjsDtHAeTX2KrkVA&callback=initMap&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUqwhL74o67qOliukRhbOf7N4gC35mNi0&callback=initMap&v=weekly"
       defer
     ></script>
 </div>
