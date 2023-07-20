@@ -5,6 +5,10 @@ $email = "";
 $name = "";
 $errors = array();
 
+//if user booking button
+if(isset($_POST['confirm_booking'])){
+    
+}
 //if user signup button
 if(isset($_POST['create_account'])){
     $name = mysqli_real_escape_string($con, $_POST['name']);
@@ -180,5 +184,21 @@ if(isset($_POST['create_account'])){
    //if login now button click
     if(isset($_POST['loginnow'])){
         header('Location: login.php');
+    }
+    
+    //if book button click
+    
+    
+    
+    if(isset($_POST['confirm_booking'])){
+        $bookingdate=mysqli_real_escape_string($con, $_POST['bookingdate']);
+        $userid="SELECT 'id' FROM usertable WHERE email='$email'";
+        $starttiming= mysqli_real_escape_string($con, $_POST['starttiming']);
+        $endtiming=mysqli_real_escape_string($con,$_POST['endtiming']);
+        $seatnumber=mysqli_real_escape_string($con,$_POST['seatnumber0']);
+        $book=mysqli_real_escape_string($con,$_POST['bookselected']);
+        $insert_booking = "INSERT INTO userbooking (booking_id,date,id,starttiming,endtiming,seatnumber,books)
+                        values('$bookingdate', '$userid', '$starttiming', '$endtiming', '$seatnumber,'$book')";
+        $booking_check = mysqli_query($con, $insert_booking);
     }
 ?>
