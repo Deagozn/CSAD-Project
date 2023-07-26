@@ -68,3 +68,77 @@ button:focus {
   display: block;
 }
 
+
+/* (B) SEATS LAYOUT */
+.table{
+    position: absolute;
+    margin-left: 137px;
+    text-align: center;
+    background-color: white;
+    width: 175px;
+    height: 150px;
+    border:2px solid black;
+    padding:10px;
+    z-index: 2;
+    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+     font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+#layout {
+  max-width: 450px;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-row-gap: 50px;
+  grid-column-gap:200px;
+  margin-bottom: 30px;
+  z-index: -2;
+   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+.seat {
+  text-align: center;
+  padding: 20px 0;
+  background: #8bc34a;
+   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+#layout .seat {
+  cursor: pointer;
+}
+.taken {
+  color: #000000;
+  background: #f44336 !important;
+   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+.selected {
+  background: #757575 !important;
+   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+/* (C) LEGEND */
+#legend {
+  display: grid;
+  grid-template-columns: 100px 200px;
+  margin-bottom: 30px;
+   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+#legend div {
+  padding: 10px;
+}
+
+/* (D) "CHECKOUT" */
+#go {
+  border: 0;
+  padding: 20px;
+  font-weight: 700;
+  color: #000000;
+  background: #3B82F6;;
+  cursor: pointer;
+}   
+

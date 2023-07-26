@@ -157,35 +157,8 @@ if($email != false && $password != false){
         
         </div>
         <div class="mb-6">
-            <label for="numberofppl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of People</label>
-            <div class="flex">
-            <select id="numberofppl" name="numberofppl" class="bg-gray-50 flex-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select> 
-            <input type="submit" class="form-control button w-32 bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded" name="selectseat" value="Confirm"/>
-            </div>
-        </div>
-    </form>
-    <form action="bookingsloggedinnew.php" method="POST">
-        <div class="mb-6">
-            <label for="numberofseat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seats</label>
-            <?php 
-                $noofppl="";
-                if(isset($_POST['selectseat'])){
-                    $noofppl=$_POST['numberofppl'];
-                    for( $i=0; $i<$noofppl; $i++ ){
-                    echo '<select id="seatnumber" name="seatnumber'.$i.'" class="bg-gray-50 flex-1 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">';
-                    echo '<option value="1">1</option>';
-                    echo '<option value="2">2</option>';
-                    echo '<option value="3">3</option>';
-                    echo '<option value="4">4</option>';
-                    echo '</select>';
-                    }
-                }
-            ?>
+            <label for="seatbooking">Seat Selection</label><br>
+            <input type="submit"id="seatbooking" name="seatbooking" class="form-control items-center justify-center button w-32 bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded" value="Select Seat"/>
         </div>
         <div class="mb-6">
             <input type="submit" name="confirm_booking" class="form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded" value="Book"/>
