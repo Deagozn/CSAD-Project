@@ -58,9 +58,11 @@
   <div class="relative mt-8 mb-8"> <!-- Add 'mt-8' for margin-top and 'mb-8' for margin-bottom -->
       <img src="Resources/bookingtab.png" alt="tab1" class="block w-1100px h-auto mx-auto">
       <!-- Button overlay with absolute position -->
-      <button class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-          Book now!
-      </button>
+      <div class="relative">
+        <button class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-1/5 h-auto font-semibold text-xs md:text-sm lg:text-xl">
+            Book now!
+        </button>
+      </div>
   </div>
 </div>
 <div class="flex justify-center items-center h-60vh">
@@ -68,9 +70,11 @@
   <div class="relative mt-8 mb-8"> <!-- Add 'mt-8' for margin-top and 'mb-8' for margin-bottom -->
       <img src="Resources/findertab.png" alt="tab1" class="block w-1100px h-auto mx-auto">
       <!-- Button overlay with absolute position -->
-      <button class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-          Find uss!
-      </button>
+      <div class="relative">
+        <button class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-1/5 h-auto font-semibold text-xs md:text-sm lg:text-xl">
+            Find Us!
+        </button>
+      </div>
   </div>
 </div>
 
