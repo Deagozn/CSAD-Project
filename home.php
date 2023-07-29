@@ -69,7 +69,7 @@
       <img src="Resources/findertab.png" alt="tab1" class="block w-1100px h-auto mx-auto">
       <!-- Button overlay with absolute position -->
       <button class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-          Find us!
+          Find uss!
       </button>
   </div>
 </div>
