@@ -7,10 +7,17 @@
   <!-- Tailwind CSS CDN link -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
 
+  <style>
+    /* Set a higher z-index for the navigation bar to keep it on top */
+    .nav-bar {
+      z-index: 9999;
+    }
+  </style>
+
 </head>
 <body class="bg-auto bg-repeat " style="background-image: url('Resources/book-background.png')">
 
-<nav class="sticky top-0 bg-indigo-100 border-blue-200 dark:bg-gray-900" style=" box-shadow: 0 0 0 1px #86b9f7;">
+<nav class="sticky top-0 nav-bar bg-indigo-100 border-blue-200 dark:bg-gray-900" style=" box-shadow: 0 0 0 1px #86b9f7;">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="home.php" class="flex items-center">
         <img src="Resources/logo-no-background.png" class="h-20 mr-5" alt="Kiasu Library Logo" />
@@ -38,13 +45,33 @@
         <li class="flex items-baseline">
           <a href="login.php" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 text-center ">LOGIN</a>        
         </li>
-
       </ul>
     </div>  
   </div>
 </nav>
+
 <div>
     
+</div>
+<div class="flex justify-center items-center h-60vh">
+  <!-- Image container with relative position -->
+  <div class="relative mt-8 mb-8"> <!-- Add 'mt-8' for margin-top and 'mb-8' for margin-bottom -->
+      <img src="Resources/bookingtab.png" alt="tab1" class="block w-1100px h-auto mx-auto">
+      <!-- Button overlay with absolute position -->
+      <button class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+          Book now!
+      </button>
+  </div>
+</div>
+<div class="flex justify-center items-center h-60vh">
+  <!-- Image container with relative position -->
+  <div class="relative mt-8 mb-8"> <!-- Add 'mt-8' for margin-top and 'mb-8' for margin-bottom -->
+      <img src="Resources/findertab.png" alt="tab1" class="block w-1100px h-auto mx-auto">
+      <!-- Button overlay with absolute position -->
+      <button class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+          Find us!
+      </button>
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
