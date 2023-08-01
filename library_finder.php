@@ -10,7 +10,7 @@
 </head>
 <body class="bg-auto bg-repeat " style="background-image: url('Resources/book-background.png')">
 
-<nav class="sticky top-0 bg-indigo-100 border-blue-200 dark:bg-gray-900" style=" box-shadow: 0 0 0 1px #86b9f7;">
+<nav class="sticky top-0 bg-indigo-100 border-blue-200 dark:bg-gray-900 z-50" style=" box-shadow: 0 0 0 1px #86b9f7;">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="home.php" class="flex items-center">
         <img src="Resources/logo-no-background.png" class="h-20 mr-5" alt="Kiasu Library Logo" />
@@ -44,8 +44,11 @@
   </div>
 </nav>
 <div>
-    <div id="googleMap" class="mt-4" style="margin-left: auto;margin-right: auto; height:500px; width:85%;"></div>
-
+    <div class="max-w-5xl w-11/12 mx-4 my-4 bg-gray-100 rounded-lg border border-black shadow-lg p-4">
+        <div class="text-blue-700 font-bold text-4xl text-center" >Library Finder</div>
+        <div class="text-blue-900 font-semibold text-2xl text-center">Use the map to find the library that is closest to you.</div>
+        <div id="googleMap" class="mt-4" style="margin-left: auto;margin-right: auto; height:500px; width:85%;"></div>
+    </div>
 <script>
   function initMap() {
     const JRL = { lat: 1.3331318186552286, lng: 103.73952682201035 };
