@@ -43,7 +43,7 @@
     </div>  
   </div>
 </nav>
-<div class="flex items-center justify-center h-screen">
+<div class="flex items-center justify-center h-screen mt-1">
     <div class="max-w-md w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
     <h1 class="text-3xl font-semibold mb-6">Feedback</h1>
     <form id="feedback_form">

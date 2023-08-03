@@ -115,62 +115,83 @@ if($email != false && $password != false){
     <div class="flex items-center justify-center h-auto mt-1">
     <div class="max-w-md w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
     <h1 class="text-3xl font-semibold mb-6 text-center">Bookings</h1>
-    <form action="bookingsloggedinnew.php" method="POST" id="mainForm" autocomplete="">
-        <?php
-        $userid3=$fetch_info['id'];
-        ?>
-        <div class="mb-6">
-        <label for="library" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Library</label>
-        <select id="library" name="library" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-            <option value="QtL"             <?php if (isset($_POST['library']) && $_POST['library'] == 'QtL') { echo 'selected="selected"'; } ?> >Queenstown Public Library</option>
-            <option value="JurongLibrary"   <?php if (isset($_POST['library']) && $_POST['library'] == 'JurongLibrary') { echo 'selected="selected"'; } ?> >Jurong Regional Library</option>
-            <option value="BedokLibrary"    <?php if (isset($_POST['library']) && $_POST['library'] == 'BedokLibrary') { echo 'selected="selected"'; } ?> >Bedok Public Library</option>
-            <option value="TampinesLibrary" <?php if (isset($_POST['library']) && $_POST['library'] == 'TampinesLibrary') { echo 'selected="selected"'; } ?> >Tampines Regional Library</option>
-        </select>
+   <?php
+    $sessid = 1;
+    $userid = $fetch_info['id'];
 
-        </div>
-        <div class="mb-6">
-        <label for="bookingdate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-        <input type="date" id="bookingdate" name="bookingdate" value="<?php if(isset($_POST['bookingdate'])){$date=$_POST['bookingdate']; echo $date;} ?>" required=""/>
-        </div>
-        <div class="mb-6">
-        <label for="starttiming" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Timing</label>
-        <select id="timing" name="timing" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-            <option value="8.00am to 9.00am"      <?php if (isset($_POST['timing']) && $_POST['timing'] == '8.00am to 9.00am') { echo 'selected="selected"'; } ?> >8.00am to 9.00am</option>
-            <option value="9.00am to 10.00am"     <?php if (isset($_POST['timing']) && $_POST['timing'] == '9.00am to 10.00am') { echo 'selected="selected"'; } ?> >9.00am to 10.00am</option>
-            <option value="10.00am to 11.00am"    <?php if (isset($_POST['timing']) && $_POST['timing'] == '10-11') { echo 'selected="selected"'; } ?> >10.00am to 11.00am</option>
-            <option value="11.00am to 12.00pm"    <?php if (isset($_POST['timing']) && $_POST['timing'] == '11-12') { echo 'selected="selected"'; } ?> >11.00am to 12.00pm</option>
-        </select>
-        </div>
-        <div class="mb-6">
-            
-        <label for="books" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Books</label>
-        <?php
-        if (!empty($row2)) {
-            ?>
-            <datalist id="books" name="books">
-            <option>No Book Selected</option>
-            <?php
-            foreach ($row2 as $rows2) {
-                echo '<option>' . htmlspecialchars($rows2['name']) . '</option>';
-            }
-            ?>
-            </datalist>
-        <?php
-        }
-        ?>
-        
-        <input placeholder="No Books Selected" name="bookselected" value="<?php if(isset($_POST['bookselected'])){$book=$_POST['bookselected']; echo $book;} ?>" autoComplete="on" list="books" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/> 
-        
-        </div>
-        <input type="hidden" name="userid3" value="<?=$userid3?>">
-        <div class="mb-6">
-        <input type="submit" name="save" value="Continue" class="cursor-pointer form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded">
-        </div>
+    // (B) GET SESSION SEATS
+    $seats = $_RSV->get($sessid);
+    ?>
+
+    <!-- (C) DRAW SEATS LAYOUT -->
+    <div style="    
+    position: absolute;
+    margin-left: 104px;
+    text-align: center;
+    background-color: white;
+    width: 175px;
+    height: 150px;
+    border:2px solid black;
+    z-index: 2;
+    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;">Table</div>
+    <div id="layout" ><?php
+    foreach (array_slice($seats,0,4) as $s) {
+      $taken = is_numeric($s["user_id"]);
+      printf("<div class='seat%s'%s>%s</div>",
+        $taken ? " taken" : "",
+        $taken ? "" : " onclick='reserve.toggle(this)'",
+        $s["seat_id"]
+      );
+    }
+    ?></div>
+    <div style="    
+    position: absolute;
+    margin-left: 104px;
+    text-align: center;
+    background-color: white;
+    width: 175px;
+    height: 150px;
+    border:2px solid black;
+    z-index: 2;
+    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;">Table</div>
+    <div id="layout" ><?php
+    foreach (array_slice($seats,4,4) as $s) {
+      $taken = is_numeric($s["user_id"]);
+      printf("<div class='seat%s'%s>%s</div>",
+        $taken ? " taken" : "",
+        $taken ? "" : " onclick='reserve.toggle(this)'",
+        $s["seat_id"]
+      );
+    }
+    ?></div>     
+
+    <!-- (D) LEGEND -->
+    <div id="legend">
+      <div class="seat"></div> <div class="txt">Open</div>
+      <div class="seat taken"></div> <div class="txt">Taken</div>
+      <div class="seat selected"></div> <div class="txt">Your Selected Seats</div>
+    </div>
+
+    <!-- (E) SAVE SELECTION -->
+    <form id="ninja" method="post" action="4-save.php">
+      <input type="hidden" name="sessid" value="<?=$sessid?>">
+      <input type="hidden" name="userid" value="<?=$userid?>">
+    </form>
+    <button id="go" onclick="reserve.save()" class="cursor-pointer form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded">Reserve Seats</button>
     </form> 
     
-</div>
-
+    </div>
+    </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
 </body>
 </html>

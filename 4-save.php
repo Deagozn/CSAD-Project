@@ -4,7 +4,5 @@ require "reserve-lib.php";
  
 // (B) SAVE
 $_RSV->save($_POST["sessid"], $_POST["userid"], $_POST["seats"]);
-echo "SAVED";
+header('Location: bookingsloggedinnew3.php');
 ?>
-<button id="gos" onclick="">Proceed</button>
-

@@ -78,7 +78,6 @@ button:focus {
     width: 175px;
     height: 150px;
     border:2px solid black;
-    padding:10px;
     z-index: 2;
     margin-top: 10px;
     display:flex;
@@ -132,13 +131,4 @@ button:focus {
   padding: 10px;
 }
 
-/* (D) "CHECKOUT" */
-#go {
-  border: 0;
-  padding: 20px;
-  font-weight: 700;
-  color: #000000;
-  background: #3B82F6;;
-  cursor: pointer;
-}   
 

@@ -59,9 +59,7 @@
       <img src="Resources/bookingtab.png" alt="tab1" class="block w-1100px h-auto mx-auto">
       <!-- Button overlay with absolute position -->
       <div class="relative">
-        <button class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-1/5 h-auto font-semibold text-xs md:text-sm lg:text-xl">
-            Book now!
-        </button>
+          <a href="login.php" type="button" class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-1/5 h-auto font-semibold text-xs md:text-sm lg:text-xl">Book now!</a>
       </div>
   </div>
 </div>

@@ -20,9 +20,11 @@ var reserve = {
         input.value = seat.innerHTML;
         ninja.appendChild(input);
       }
+
       ninja.submit();
     }
+    //     var mainForm = document.getElementById("mainForm");
+    //    mainForm.submit();
   }
 };
-
 

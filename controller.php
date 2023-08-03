@@ -1,14 +1,11 @@
 <?php 
 session_start();
 require "connection.php";
+require 'reserve-lib.php';
 $email = "";
 $name = "";
 $errors = array();
 
-//if user booking button
-if(isset($_POST['confirm_booking'])){
-    
-}
 //if user signup button
 if(isset($_POST['create_account'])){
     $name = mysqli_real_escape_string($con, $_POST['name']);
@@ -186,11 +183,119 @@ if(isset($_POST['create_account'])){
         header('Location: login.php');
     }
     
-    //if book button click
-    
-    
-    //if select seat button clicked
-    if(isset($_POST['seatbooking'])){
-        header('Location: reservation.php');
+    //if save button click
+ if(isset($_POST['save'])){
+    try {
+        // Connect to the database using PDO
+        $pdo = new PDO(
+            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET,
+            DB_USER, DB_PASSWORD, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
+
+        // Retrieve the values from the form
+        $userid2 = $_POST['userid3'];
+        $date = $_POST['bookingdate'];
+        $timing = $_POST['timing'];
+        $seatno = 1;
+        $books = $_POST['bookselected'];
+
+        // Prepare the INSERT query
+        $insert_booking = "INSERT INTO userbooking (date, id, timing, seatnumber, books)
+                        VALUES (:date, :userid, :timing, :seatno, :books)";
+
+        // Create a prepared statement
+        $stmt = $pdo->prepare($insert_booking);
+
+        // Bind the parameters and execute the query
+        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':userid', $userid2); // Assuming $_POST['userid3'] contains the user id
+        $stmt->bindParam(':timing', $timing);
+        $stmt->bindParam(':seatno', $seatno);
+        $stmt->bindParam(':books', $books);
+        $stmt->execute();
+
+        // If the execution is successful, the data should now be in the database
+        echo "Data submitted successfully!";
+    } catch (PDOException $e) {
+        // Handle database errors if any
+        // For example, display an error message to the user.
+        // echo "Database Error: " . $e->getMessage();
     }
+    header("Location: bookingsloggedinnew2.php");
+}
+
+
+
+
+
+if (isset($_POST['completebooking'])) {
+    try {
+        // Connect to the database using PDO
+        $pdo = new PDO(
+            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET,
+            DB_USER, DB_PASSWORD, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]
+        );
+
+        $userid4 = $_POST['userid4'];
+        $reservation_query = "SELECT seat_id FROM reservations WHERE user_id = :userid";
+        $stmt = $pdo->prepare($reservation_query);
+        $stmt->bindParam(':userid', $userid4);
+        $stmt->execute();
+        $reservation_data = $stmt->fetchAll();
+
+        if ($reservation_data) {
+            
+            // Seat number found, update the 'userbooking' table
+            $seatno = $reservation_data[0]['seat_id'];
+
+            // Prepare the UPDATE query
+            $update_booking_first_row = "UPDATE userbooking SET seatnumber = :seatno WHERE id = :userid";
+
+            // Create a prepared statement for the UPDATE query
+            $stmt_update = $pdo->prepare($update_booking_first_row);
+
+            // Bind the parameters for the update query
+            $stmt_update->bindParam(':seatno', $seatno);
+            $stmt_update->bindParam(':userid', $userid4);
+
+            // Execute the UPDATE query
+            $stmt_update->execute();
+            
+            $userbookings_query="SELECT date, timing, books FROM userbooking WHERE id= :userid";
+            $stmt_prev_data=$pdo->prepare($userbookings_query);
+            $stmt_prev_data->bindParam(':userid', $userid4);
+            $stmt_prev_data->execute();
+            $userbookings_data= $stmt_prev_data->fetch();
+            
+            if ($userbookings_data){
+                
+                $userbooking_insert="INSERT INTO userbooking (date,id,timing,seatnumber,books) VALUES (:date, :userid, :timing, :seatno, :books)";
+                $stmt_insert= $pdo->prepare($userbooking_insert);
+                
+                for($i=1;$i < count($reservation_data);$i++){
+                    $seatno = $reservation_data[$i]['seat_id'];
+                    $stmt_insert->bindParam(':date', $userbookings_data['date']);
+                    $stmt_insert->bindParam(':userid', $userid4);
+                    $stmt_insert->bindParam(':timing', $userbookings_data['timing']);
+                    $stmt_insert->bindParam(':seatno', $seatno);
+                    $stmt_insert->bindParam(':books', $userbookings_data['books']);
+
+                    // Execute the INSERT query
+                    $stmt_insert->execute();
+                }
+            }
+            echo "Seat number updated successfully!";
+        }
+    } catch (PDOException $e) {
+        // Handle database errors if any
+        // For example, display an error message to the user.
+        // echo "Database Error: " . $e->getMessage();
+    }
+}
+
 ?>

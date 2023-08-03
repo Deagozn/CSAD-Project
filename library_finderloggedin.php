@@ -30,12 +30,13 @@ if($email != false && $password != false){
   <!-- Tailwind CSS CDN link -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
   <link a href="style.css" rel="stylesheet"/>
+
 </head>
 <body class="bg-auto bg-repeat " style="background-image: url('Resources/book-background.png')">
 
-<nav class="sticky top-0 bg-indigo-100 border-blue-200 dark:bg-gray-900" style=" box-shadow: 0 0 0 1px #86b9f7;">
+<nav class="sticky top-0 bg-indigo-100 border-blue-200 dark:bg-gray-900" style=" z-index: 2; box-shadow: 0 0 0 1px #86b9f7;">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="homeloggedin.php" class="flex items-center">
+    <a href="home.php" class="flex items-center">
         <img src="Resources/logo-no-background.png" class="h-20 mr-5" alt="Kiasu Library Logo" />
     </a>
     <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -47,19 +48,19 @@ if($email != false && $password != false){
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-indigo-100 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-indigo-100 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li class="flex items-center">
-          <a href="homeloggedin.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">HOME</a>
+          <a href="homeloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">HOME</a>
         </li>
         <li class="flex items-center">
-         <div class="dropdown">
+            <div class="dropdown">
           <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" >BOOKINGS</button>
-            <div class="dropdown-content">
+            <div class="dropdown-content" >
             <a href="bookingsloggedinnew.php">New Bookings</a>
             <a href="">Existing Bookings</a>
             </div>
           </div> 
         </li>
         <li class="flex items-center">
-          <a href="library_finderloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">LIBRARY FINDER</a>
+          <a href="library_finderloggedin.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">LIBRARY FINDER</a>
         </li>
         <li class="flex items-center">
           <a href="feedbackloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FEEDBACK</a>
@@ -72,35 +73,77 @@ if($email != false && $password != false){
     </div>  
   </div>
 </nav>
-<div>
-    
-</div>
-    <div>
-    
-</div>
-<div class="flex justify-center items-center h-60vh">
-  <!-- Image container with relative position -->
-  <div class="relative mt-8 mb-8"> <!-- Add 'mt-8' for margin-top and 'mb-8' for margin-bottom -->
-      <img src="Resources/bookingtab.png" alt="tab1" class="block w-1100px h-auto mx-auto">
-      <!-- Button overlay with absolute position -->
-      <div class="relative">
-          <a href="bookingsloggedinnew.php" type="button" class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-1/5 h-auto font-semibold text-xs md:text-sm lg:text-xl">Book now!</a>
-      </div>
-  </div>
-</div>
-<div class="flex justify-center items-center h-60vh">
-  <!-- Image container with relative position -->
-  <div class="relative mt-8 mb-8"> <!-- Add 'mt-8' for margin-top and 'mb-8' for margin-bottom -->
-      <img src="Resources/findertab.png" alt="tab1" class="block w-1100px h-auto mx-auto">
-      <!-- Button overlay with absolute position -->
-      <div class="relative">
-        <button class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-1/5 h-auto font-semibold text-xs md:text-sm lg:text-xl">
-            Find Us!
-        </button>
-      </div>
-  </div>
-</div>
+<div style="z-index: -1">
+    <div id="googleMap" class="mt-4" style="margin-left: auto;margin-right: auto; height:500px; width:85%;"></div>
 
+<script>
+  function initMap() {
+    const JRL = { lat: 1.3331318186552286, lng: 103.73952682201035 };
+    const QPL = { lat: 1.2989587537978944, lng: 103.80523734215485 };
+    const TRL = { lat: 1.352444742798928, lng: 103.94119518645469 };
+    const BPL = { lat: 1.3270474451349594, lng: 103.93172288646228 };
+    const map = new google.maps.Map(document.getElementById("googleMap"), {
+      zoom: 15,
+      center: JRL,
+    });
+
+    new google.maps.Marker({
+      position: JRL,
+      map,
+      title: "Jurong Regional Library",
+    });
+
+    new google.maps.Marker({
+      position: QPL,
+      map,
+      title: "Queenstown Public Library",
+    });
+
+    new google.maps.Marker({
+      position: TRL,
+      map,
+      title: "Tampines Regional Library",
+    });
+
+    new google.maps.Marker({
+      position: BPL,
+      map,
+      title: "Bedok Public Library",
+    });
+
+    // Get user's location and mark it with a different marker
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          const userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          new google.maps.Marker({
+            position: userLocation,
+            map,
+            title: "Your location",
+            icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Use a blue dot icon for user location
+          });
+
+          // Center the map on the user's location
+          map.setCenter(userLocation);
+        },
+        function (error) {
+          console.error("Error getting user's location:", error);
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }
+</script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUqwhL74o67qOliukRhbOf7N4gC35mNi0&callback=initMap&v=weekly"
+      defer
+    ></script>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
 </body>

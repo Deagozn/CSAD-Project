@@ -30,6 +30,7 @@ if($email != false && $password != false){
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Tailwind CSS CDN link -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
+  <link a href="style.css" rel="stylesheet"/>
 
 </head>
 <body class="bg-auto bg-repeat " style="background-image: url('Resources/book-background.png')">
@@ -52,10 +53,16 @@ if($email != false && $password != false){
           <a href="homeloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">HOME</a>
         </li>
         <li class="flex items-center">
-          <a href="bookingsloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">BOOKINGS</a>
+          <div class="dropdown">
+          <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" >BOOKINGS</button>
+            <div class="dropdown-content">
+            <a href="bookingsloggedinnew.php">New Bookings</a>
+            <a href="">Existing Bookings</a>
+            </div>
+          </div> 
         </li>
         <li class="flex items-center">
-          <a href="library_finder.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">LIBRARY FINDER</a>
+          <a href="library_finderloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">LIBRARY FINDER</a>
         </li>
         <li class="flex items-center">
           <a href="feedbackloggedin.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">FEEDBACK</a>
@@ -67,7 +74,7 @@ if($email != false && $password != false){
     </div>  
   </div>
 </nav>
-<div class="flex items-center justify-center h-screen">
+<div class="flex items-center justify-center h-screen mt-1">
     <div class="max-w-md w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
     <h1 class="text-3xl font-semibold mb-6">Feedback</h1>
     <form id="feedback_form">
