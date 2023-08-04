@@ -30,6 +30,8 @@ if($email != false && $password != false){
   <!-- Tailwind CSS CDN link -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
   <link a href="style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="chatbot.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"/>
 </head>
 <body class="bg-auto bg-repeat " style="background-image: url('Resources/book-background.png')">
 
@@ -100,8 +102,41 @@ if($email != false && $password != false){
       </div>
   </div>
 </div>
+    
+<div  class="chat-box">
+  <div class="chat-box-header">
+      <h3>Need Help?</h3>
+      <p>
+        <i class="fa fa-times"></i> 
+      </p>
+  </div>
+  <div class="chat-box-body">
+    <div class="chat-box-body-receive">
+      <p>Hi, how can help you?</p>
+    </div>
+  </div>
+  <div class="chat-box-footer">
+      <input placeholder="Enter Your Message" type="text" id="userInput">
+      <i id="sendButton" class="send far fa-paper-plane"></i>
+  </div>
+</div>
+
+
+<div class="chat-button">
+  <span></span>
+</div>
+
+
+<div class="modal">
+        <div class="modal-content">
+            <span class="modal-close-button">&times;</span>
+            <h1>Add What you want here.</h1>
+        </div>
+    </div>    
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="chatbot.js"></script>
 </body>
 </html>
