@@ -22,42 +22,40 @@ document.getElementById("userInput").addEventListener("keypress", function(event
   }
 });
 
-function handleUserInput() {
+async function handleUserInput() {
     var chatBoxBody = document.querySelector(".chat-box-body");
     var userInputElement = document.getElementById("userInput");
-    var userInput = userInputElement.value.trim().toLowerCase();
-    userInput = userInput.replace(/[^\w\s]/g, "");
-    
-    var sendHTML = "";
+    var userInput = userInputElement.value.trim();
+    var cleanedUserInput = userInput.toLowerCase().replace(/[^\w\s]/g, "");
+
+    var sendHTML = `
+      <div class="chat-box-body-send">
+        <p>${userInput}</p>
+      </div>
+    `;
+
     var responseHTML = "";
-    
-    switch (userInput) {
-    case "what is your name":
-      responseHTML = createResponse("My name is Kiasu Librarian.");
-      break;
-    case "what do you do":
-      responseHTML = createResponse("I can answer your questions about the website.");
-      break;
-    case "how can i use the website":
-      responseHTML = createResponse("You can use the website to find libraries around you, book seats, check seat availability and much more.");
-      break;
-    case "how do i book a seat":
-      responseHTML = createResponse("You can book a seat by clicking bookings, and selecting new booking. You then can select your which library to book for, when, and which seat you want. You also have the option to reserve a book together with your seat.");
-      break;
-    default:
-      responseHTML = createResponse("I'm sorry, I don't understand. Can you please clarify?");
-  }
-    
-    sendHTML = createSender(userInput);
+
+    try {
+        const response = await fetch(`ChatbotApi.php?userInput=${encodeURIComponent(cleanedUserInput)}`);
+        const data = await response.json();
+
+        if (data && data.response) {
+            responseHTML = createResponse(data.response);
+        } else {
+            responseHTML = createResponse("I'm sorry, I don't understand. Can you please clarify?");
+        }
+    } catch (error) {
+        console.error("Error fetching data from the server:", error);
+        responseHTML = createResponse("Oops! Something went wrong. Please try again later.");
+    }
+
     chatBoxBody.innerHTML += sendHTML;
-    
     chatBoxBody.innerHTML += responseHTML;
-    
     chatBoxBody.scrollTop = chatBoxBody.scrollHeight;
-    
     userInputElement.value = "";
-    
 }
+
 
 function createSender(sendText) {
     return `

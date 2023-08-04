@@ -1,10 +1,12 @@
+/* chatbot.css */
+
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css?family=Raleway|Ubuntu&display=swap');
 
 body {
   background: #E8EBF5;
   padding: 0;
   margin: 0;
-  font-family: Raleway;
 }
 
 .chat-box {
@@ -40,7 +42,7 @@ body {
 }
 
 .chat-box-header h3 {
-  font-family: ubuntu;
+  font-family: Ubuntu, sans-serif;
   font-weight: 700;
   float: left;
   position: absolute;
@@ -129,7 +131,7 @@ body {
   border-radius: 50px;
   background: #b5dbf5;
   margin: 10px;
-  font-family: ubuntu;
+  font-family: Ubuntu, sans-serif;
   font-weight: 600;
   color: #444;
   width: 320px;
@@ -222,16 +224,9 @@ body {
   position: absolute;
   left: 50px;
   top: 5px;
-  
 }
 
-@media screen and (max-width: 450px) {
-  .chat-box {
-    width: 100%;
-    margin: 0;
-    border-radius: 0;
-    right: auto;
-    bottom: auto;
-  }
+/* Additional custom styles for other elements can be added here */
+/* For example, you can add styles for the body, navbar, etc. */
 
-}
+/* End of chatbot.css */
