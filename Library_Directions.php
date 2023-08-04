@@ -47,71 +47,85 @@
     <div class="max-w-5xl w-11/12 mx-4 my-4 bg-gray-100 rounded-lg border border-black shadow-lg p-4">
         <div class="text-blue-700 font-bold text-4xl text-center" >Library Finder</div>
         <div class="text-blue-900 font-semibold text-2xl text-center">Use the map to find the library that is closest to you.</div>
-        <div id="googleMap" class="mt-4" style="margin-left: auto;margin-right: auto; height:500px; width:85%;"></div>
+        <div>
+            <div id="floating-panel">
+            <b>Library: </b>
+            <select id="end">
+              <option value="Jurong Regional Library">Jurong Regional Library</option>
+              <option value="Queenstown Public Library">Queenstown Public Library</option>
+              <option value="Tampines Regional Library">Tampines Regional Library</option>
+              <option value="Bedok Public Library">Bedok Public Library</option>
+            </select>
+            </div>
+            <div id="googleMap" class="mt-4" style="margin-left: auto;margin-right: auto; height:500px; width:85%;"></div>
+        </div>
+        
     </div>
 <script>
   function initMap() {
-    const JRL = { lat: 1.3331318186552286, lng: 103.73952682201035 };
-    const QPL = { lat: 1.2989587537978944, lng: 103.80523734215485 };
-    const TRL = { lat: 1.352444742798928, lng: 103.94119518645469 };
-    const BPL = { lat: 1.3270474451349594, lng: 103.93172288646228 };
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
     const map = new google.maps.Map(document.getElementById("googleMap"), {
-      zoom: 15,
-      center: JRL
+      zoom: 7,
+      center: { lat: 41.85, lng: -87.65 }
     });
 
-    new google.maps.Marker({
-      position: JRL,
-      map,
-      title: "Jurong Regional Library"
-    });
+    directionsRenderer.setMap(map);
 
-    new google.maps.Marker({
-      position: QPL,
-      map,
-      title: "Queenstown Public Library"
-    });
+    // Define userLocation in the initMap scope
+    let userLocation = null;
 
-    new google.maps.Marker({
-      position: TRL,
-      map,
-      title: "Tampines Regional Library"
-    });
+    const onChangeHandler = function () {
+      calculateAndDisplayRoute(directionsService, directionsRenderer);
+    };
 
-    new google.maps.Marker({
-      position: BPL,
-      map,
-      title: "Bedok Public Library"
-    });
+    document.getElementById("end").addEventListener("change", onChangeHandler);
 
-    // Get user's location and mark it with a different marker
+    // Automatically fetch user's location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        function (position) {
-          const userLocation = {
+        (position) => {
+          userLocation = {
             lat: position.coords.latitude,
-            lng: position.coords.longitude,
+            lng: position.coords.longitude
           };
-
-          new google.maps.Marker({
-            position: userLocation,
-            map,
-            title: "Your location",
-            icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Use a blue dot icon for user location
-          });
-
-          // Center the map on the user's location
-          map.setCenter(userLocation);
+          
+          calculateAndDisplayRoute(directionsService, directionsRenderer);
         },
-        function (error) {
-          console.error("Error getting user's location:", error);
+        (error) => {
+          console.error("Error getting user location:", error);
         }
       );
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      console.error("Geolocation is not supported by this browser.");
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+      // Check if userLocation is available before proceeding
+      if (!userLocation) {
+        console.error("User location is not available.");
+        return;
+      }
+
+      directionsService
+        .route({
+          origin: {
+            query: userLocation.lat + ", " + userLocation.lng
+          },
+          destination: {
+            query: document.getElementById("end").value
+          },
+          travelMode: google.maps.TravelMode.DRIVING
+        })
+        .then((response) => {
+          directionsRenderer.setDirections(response);
+        })
+        .catch((e) => window.alert("Directions request failed due to " + status));
     }
   }
 </script>
+
+
 <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUqwhL74o67qOliukRhbOf7N4gC35mNi0&callback=initMap&v=weekly"
       defer
