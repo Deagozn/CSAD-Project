@@ -57,7 +57,7 @@ if($email != false && $password != false){
           <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" >BOOKINGS</button>
             <div class="dropdown-content">
             <a href="bookingsloggedinnew.php">New Bookings</a>
-            <a href="">Existing Bookings</a>
+            <a href="bookingsloggedinexisting.php">Existing Bookings</a>
             </div>
           </div> 
         </li>
