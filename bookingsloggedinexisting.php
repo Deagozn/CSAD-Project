@@ -226,8 +226,10 @@ if ($result3->num_rows > 0) {
     ?>
     </table>
     <?php
-    }
+    } else{
     ?>
+    <p class="block mb-2 text-sm font-medium text-gray-600 dark:text-white text-center"> No Bookings Have Been Made</p>
+    <?php } ?>
 
 
     
