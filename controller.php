@@ -278,7 +278,7 @@ if (isset($_POST['completebooking'])) {
                 $stmt_insert= $pdo->prepare($userbooking_insert);
                 
                 for($i=1;$i < count($reservation_data);$i++){
-                    $seatno = $reservation_data[$i]['seat_id'];
+                    $seatno = $reservation_data[$i]['seat_id']; 
                     $stmt_insert->bindParam(':date', $userbookings_data['date']);
                     $stmt_insert->bindParam(':userid', $userid4);
                     $stmt_insert->bindParam(':timing', $userbookings_data['timing']);

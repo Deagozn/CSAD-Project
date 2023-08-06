@@ -21,6 +21,54 @@ if($email != false && $password != false){
     header('Location: login.php');
 }
 ?>
+<?php
+if (isset($_POST['deletebooking'])) {
+    $servername2 = "localhost";
+    $username2 = "root";
+    $password2 = "";
+    $dbname2 = "userform";
+
+    // Connect to the database
+    $conn2 = new mysqli($servername2, $username2, $password2, $dbname2);
+
+    if ($conn2->connect_error) {
+        $errorMsg = "Failed to connect to MySQL: " . $conn2->connect_error;
+        console_log($errorMsg);
+        exit();
+    }
+
+    $booking_id = $_POST['booking_id'];
+    // Prepare the delete query using prepared statements for userbooking table
+    $stmt = $conn2->prepare("DELETE FROM userbooking WHERE booking_id = ?");
+    $stmt->bind_param("i", $booking_id); // Assuming booking_id is an integer, use "i" for integer parameter binding
+    $result = $stmt->execute();
+
+    if ($result) {
+        // Successfully deleted the booking from userbooking table
+        // Now proceed to delete from reservations table
+        $seatnum = $_POST['seatno'];
+        $stmt2 = $conn2->prepare("DELETE FROM reservations WHERE seat_id = ?");
+        $stmt2->bind_param("s", $seatnum);
+        $result2 = $stmt2->execute();
+
+        if ($result2) {
+            // Successfully deleted the booking from reservations table
+            header("Location: bookingsloggedinexisting.php"); // Redirect to the table view page after deletion
+            exit();
+        } else {
+            // Handle the deletion error for reservations table
+            $errorMsg = "Failed to delete booking from reservations: " . $conn2->error;
+            console_log($errorMsg); // Assuming you have a function for logging errors
+        }
+    } else {
+        // Handle the deletion error for userbooking table
+        $errorMsg = "Failed to delete booking from userbooking: " . $conn2->error;
+        console_log($errorMsg); // Assuming you have a function for logging errors
+    }
+}
+?>
+
+
 
 <?php
 
@@ -152,19 +200,24 @@ if ($result3->num_rows > 0) {
             <td style="border:2px solid black; padding: 5px">Timing</td>
             <td style="border:2px solid black; padding: 5px">Seat Number</td>
             <td style="border:2px solid black; padding: 5px">Books</td>
-        </tr>
-        <?php
-            foreach ($row3 as $row4) {
-        ?>
+            <td style="border:2px solid black; padding: 5px">Delete</td>
+        </tr><?php foreach ($row3 as $row4) {?>
         <tr style="border:2px solid black;">
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['date']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['timing']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['seatnumber']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['books']?></td>
+        <td style="border:2px solid black; padding: 5px">
+            <form action="bookingsloggedinexisting.php" method="POST">
+                <input type="hidden" name="booking_id" value="<?php echo $row4['booking_id']; ?>">
+                <input type="hidden" name="seatno" value="<?php echo $row4['seatnumber']; ?>">
+                <input name="deletebooking" type="submit" class="cursor-pointer form-control button w-full bg-red-500 hover:bg-blue-600 text-white font-medium py-3 rounded" value="Delete">
+            </form>
+        </td>
         </tr>
-        <?php
-            }
-        ?>
+    <?php 
+        }
+    ?>
     </table>
     <?php
     }

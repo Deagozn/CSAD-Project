@@ -35,7 +35,7 @@ if($email != false && $password != false){
 </head>
 <body class="bg-auto bg-repeat " style="background-image: url('Resources/book-background.png')">
 
-<nav class="sticky top-0 bg-indigo-100 border-blue-200 dark:bg-gray-900" style=" box-shadow: 0 0 0 1px #86b9f7;">
+<nav class="sticky top-0 bg-indigo-100 border-blue-200 dark:bg-gray-900" style=" z-index: 4; box-shadow: 0 0 0 1px #86b9f7;">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="homeloggedin.php" class="flex items-center">
         <img src="Resources/logo-no-background.png" class="h-20 mr-5" alt="Kiasu Library Logo" />
