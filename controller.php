@@ -289,13 +289,13 @@ if (isset($_POST['completebooking'])) {
                     $stmt_insert->execute();
                 }
             }
-            echo "Seat number updated successfully!";
         }
     } catch (PDOException $e) {
         // Handle database errors if any
         // For example, display an error message to the user.
         // echo "Database Error: " . $e->getMessage();
     }
+    header("Location: bookingsloggedinexisting.php");
 }
 
 ?>
