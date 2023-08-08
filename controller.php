@@ -301,4 +301,86 @@ if (isset($_POST['completebooking'])) {
     header("Location: bookingsloggedinexisting.php");
 }
 
+//if continue button
+if(isset($_POST['submitprofile'])){    
+    try {
+        // Connect to the database using PDO
+        $pdo = new PDO(
+            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET,
+            DB_USER, DB_PASSWORD, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]
+        );   
+
+        $userid6 = $_POST['settingsid'];
+        $name = $_POST['changename'];
+        $email = $_POST['changeemail'];
+        $phone_number = $_POST['changephoneno'];
+        $password = $_POST['changepassword'];
+        $cpassword = $_POST['changecfm_password'];
+        $nochangepass = $_POST['nochangepass'];
+        $errors = array();
+
+        if($password !== $cpassword){
+            $errors['password'] = "Confirm password not matched!";
+        }
+
+        if ($password === '' && $cpassword === '') {
+            $password = $nochangepass;
+        } else {
+            $password = password_hash($password, PASSWORD_BCRYPT);
+        }
+
+        // Perform the email check using PDO
+        $email_check_query = "SELECT * FROM usertable WHERE email = :email";
+        $email_check_stmt = $pdo->prepare($email_check_query);
+        $email_check_stmt->bindParam(':email', $email);
+        $email_check_stmt->execute();
+        $res = $email_check_stmt->fetchAll();
+
+        if(count($res) > 0){
+            $errors['email'] = "Email that you have entered is already exist!";
+        }
+
+        if(count($errors) === 0){
+            $code = rand(999999, 111111);
+            $status = "notverified";
+            
+            // Update data using PDO prepared statement
+            $update_data_query = "UPDATE usertable SET name=:name, email=:email, password=:pass, code=:code, status=:status, phone_number=:phoneno WHERE id=:userid";
+            $update_data_stmt = $pdo->prepare($update_data_query);
+            $update_data_stmt->bindParam(':name', $name);
+            $update_data_stmt->bindParam(':userid', $userid6);
+            $update_data_stmt->bindParam(':email', $email);
+            $update_data_stmt->bindParam(':pass', $password);
+            $update_data_stmt->bindParam(':code', $code);
+            $update_data_stmt->bindParam(':status', $status);
+            $update_data_stmt->bindParam(':phoneno',$phone_number);
+            $update_data_stmt->execute();
+            
+            if($update_data_stmt->rowCount() > 0){
+                $email=$_POST['changeemail'];
+                $subject = "Email Verification Code";
+                $message = "Your verification code is $code";
+                $sender = "From: NoReply.KiasuLibrary@gmail.com";
+                
+                if(mail($email, $subject, $message, $sender)){
+                    $info = "We've sent a verification code to your email - $email";
+                    $_SESSION['info'] = $info;
+                    $_SESSION['email'] = $email;
+                    $_SESSION['password'] = $password;
+                    header('location: settingschangeotp.php');
+                    exit();
+                } else {
+                    $errors['otp-error'] = "Failed while sending code!";
+                }
+            } else {
+                $errors['db-error'] = "Failed while updating data in the database!";
+            }
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
 ?>

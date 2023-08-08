@@ -164,7 +164,7 @@ if ($result3->num_rows > 0) {
         <li class="flex items-center">
           <a href="homeloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">HOME</a>
         </li>
-       <li class="flex items-center">
+        <li class="flex items-center">
           <div class="dropdown">
           <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">BOOKINGS</button>
             <div class="dropdown-content">
@@ -177,26 +177,18 @@ if ($result3->num_rows > 0) {
           <div class="dropdown">
           <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" >LIBRARY FINDER</button>
             <div class="dropdown-content">
-            <a href="library_finderloggedin.php">Libraries</a>
+            <a href="library_finderloggedin.php">Locator</a>
             <a href="Library_Directionsloggedin.php">Directions</a>
             </div>
-          </div>        
-        </li>
-        <li class="flex items-center">
-          <a href="seatmaploggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">SEAT MAP</a>
+          </div> 
         </li>
         <li class="flex items-center">
           <a href="feedbackloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FEEDBACK</a>
         </li>
         <li class="flex items-baseline">
-            <div class="dropdown">
             <h1 class="text-xl mb-1">Welcome Back, <span class="font-bold text-blue-700"><?php echo $fetch_info['name'];?></span>!</h1>
-            <div class="dropdown-content">
-            <a href="settings.php">Settings</a>
-            <a href="home.php">Logout</a>
-            </div>
-            </div>
         </li>
+
       </ul>
     </div>  
   </div>
@@ -205,18 +197,37 @@ if ($result3->num_rows > 0) {
     <div class="flex items-center justify-center h-auto mt-1">
     <div class="max-w-2xl w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
     <h1 class="text-3xl font-semibold mb-6 text-center">Settings</h1>
-    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name:</label>
-    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo $fetch_info['name']; ?></div>
-    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email:</label>
-    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo $fetch_info['email']; ?></div>
-    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number:</label>
-    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo $fetch_info['phone_number']; ?></div>
-    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password:</label>
-    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">********</div>
-    <div class="mt-6">
-    <form action="settingschange.php" method="POST">
-    <input type="submit" name="editprofile" value="Edit" class="cursor-pointer form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded"/>
-    </form>
+    <form action="settingschangeotp.php" method="POST" autocomplete="off">
+                    <h2 class="text-3xl font-semibold mb-6">Code Verification</h2>
+                    <?php 
+                    if(isset($_SESSION['info'])){
+                        ?>
+                        <div class="alert alert-success text-center" style="padding: 0.4rem 0.4rem">
+                            <?php echo $_SESSION['info']; ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <?php
+                    if(count($errors) > 0){
+                        ?>
+                        <div class="alert alert-danger text-center">
+                            <?php
+                            foreach($errors as $showerror){
+                                echo $showerror;
+                            }
+                            ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <div class="form-group">
+                        <input class="form-control mt-1 block w-full" type="number" name="otp" placeholder="Enter code" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded mt-2" type="submit" name="check-change-otp" value="Submit">
+                    </div>
+                </form>
     </div>   
     </div>
 </div>

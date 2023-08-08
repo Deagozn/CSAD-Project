@@ -1,3 +1,4 @@
+<?php require 'reserve-lib.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +61,71 @@
     </div>  
   </div>
 </nav>
+<div>
+    <div class="flex items-center justify-center h-auto mt-1">
+    <div class="max-w-md w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
+    <h1 class="text-3xl font-semibold mb-6 text-center">Bookings</h1>
+   <?php
+    $sessid = 1;
 
+    // (B) GET SESSION SEATS
+    $seats = $_RSV->get($sessid);
+    ?>
+
+    <!-- (C) DRAW SEATS LAYOUT -->
+    <div style="    
+    position: absolute;
+    margin-left: 104px;
+    text-align: center;
+    background-color: white;
+    width: 175px;
+    height: 150px;
+    border:2px solid black;
+    z-index: 2;
+    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;">Table</div>
+    <div id="layout" ><?php
+    foreach (array_slice($seats,0,4) as $s) {
+      $taken = is_numeric($s["user_id"]);
+      printf("<div class='seat%s'%s>%s</div>",
+        $taken ? " taken" : "",
+        $taken ? "" : " onclick='reserve.toggle(this)'",
+        $s["seat_id"]
+      );
+    }
+    ?></div>
+    <div style="    
+    position: absolute;
+    margin-left: 104px;
+    text-align: center;
+    background-color: white;
+    width: 175px;
+    height: 150px;
+    border:2px solid black;
+    z-index: 2;
+    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;">Table</div>
+    <div id="layout" ><?php
+    foreach (array_slice($seats,4,4) as $s) {
+      $taken = is_numeric($s["user_id"]);
+      printf("<div class='seat%s'%s>%s</div>",
+        $taken ? " taken" : "",
+        $taken ? "" : " onclick='reserve.toggle(this)'",
+        $s["seat_id"]
+      );
+    }
+    ?></div>
+    </div>
+    </div>
+    </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

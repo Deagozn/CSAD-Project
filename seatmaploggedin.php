@@ -57,25 +57,31 @@ if($email != false && $password != false){
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-indigo-100 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-indigo-100 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li class="flex items-center">
-          <a href="home.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">HOME</a>
+          <a href="homeloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">HOME</a>
         </li>
-        <li class="flex items-center">
-          <a href="bookings.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">BOOKINGS</a>
+       <li class="flex items-center">
+          <div class="dropdown">
+          <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" >BOOKINGS</button>
+            <div class="dropdown-content">
+            <a href="bookingsloggedinnew.php">New Bookings</a>
+            <a href="bookingsloggedinexisting.php" >Existing Bookings</a>
+            </div>
+        </div> 
         </li>
         <li class="flex items-center">
           <div class="dropdown">
           <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" >LIBRARY FINDER</button>
             <div class="dropdown-content">
-            <a href="library_finder.php">Libraries</a>
-            <a href="Library_Directions.php">Directions</a>
+            <a href="library_finderloggedin.php">Libraries</a>
+            <a href="Library_Directionsloggedin.php">Directions</a>
             </div>
           </div>        
         </li>
         <li class="flex items-center">
-          <a href="seatmap.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">SEAT MAP</a>
+          <a href="seatmaploggedin.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">SEAT MAP</a>
         </li>
         <li class="flex items-center">
-          <a href="feedback.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FEEDBACK</a>
+          <a href="feedbackloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FEEDBACK</a>
         </li>
         <li class="flex items-baseline">
             <div class="dropdown">
@@ -90,6 +96,71 @@ if($email != false && $password != false){
     </div>  
   </div>
 </nav>
+   <div>
+    <div class="flex items-center justify-center h-auto mt-1">
+    <div class="max-w-md w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
+    <h1 class="text-3xl font-semibold mb-6 text-center">Bookings</h1>
+   <?php
+    $sessid = 1;
+
+    // (B) GET SESSION SEATS
+    $seats = $_RSV->get($sessid);
+    ?>
+
+    <!-- (C) DRAW SEATS LAYOUT -->
+    <div style="    
+    position: absolute;
+    margin-left: 104px;
+    text-align: center;
+    background-color: white;
+    width: 175px;
+    height: 150px;
+    border:2px solid black;
+    z-index: 2;
+    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;">Table</div>
+    <div id="layout" ><?php
+    foreach (array_slice($seats,0,4) as $s) {
+      $taken = is_numeric($s["user_id"]);
+      printf("<div class='seat%s'%s>%s</div>",
+        $taken ? " taken" : "",
+        $taken ? "" : " onclick='reserve.toggle(this)'",
+        $s["seat_id"]
+      );
+    }
+    ?></div>
+    <div style="    
+    position: absolute;
+    margin-left: 104px;
+    text-align: center;
+    background-color: white;
+    width: 175px;
+    height: 150px;
+    border:2px solid black;
+    z-index: 2;
+    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;">Table</div>
+    <div id="layout" ><?php
+    foreach (array_slice($seats,4,4) as $s) {
+      $taken = is_numeric($s["user_id"]);
+      printf("<div class='seat%s'%s>%s</div>",
+        $taken ? " taken" : "",
+        $taken ? "" : " onclick='reserve.toggle(this)'",
+        $s["seat_id"]
+      );
+    }
+    ?></div>
+    </div>
+    </div>
+    </div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>

@@ -166,7 +166,7 @@ if ($result3->num_rows > 0) {
         </li>
        <li class="flex items-center">
           <div class="dropdown">
-          <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">BOOKINGS</button>
+          <button class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">BOOKINGS</button>
             <div class="dropdown-content">
             <a href="bookingsloggedinnew.php">New Bookings</a>
             <a href="bookingsloggedinexisting.php" >Existing Bookings</a>
@@ -177,16 +177,16 @@ if ($result3->num_rows > 0) {
           <div class="dropdown">
           <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" >LIBRARY FINDER</button>
             <div class="dropdown-content">
-            <a href="library_finderloggedin.php">Libraries</a>
-            <a href="Library_Directionsloggedin.php">Directions</a>
+            <a href="library_finder.php">Libraries</a>
+            <a href="Library_Directions.php">Directions</a>
             </div>
           </div>        
         </li>
         <li class="flex items-center">
-          <a href="seatmaploggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">SEAT MAP</a>
+          <a href="seatmaploggedin.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">SEAT MAP</a>
         </li>
         <li class="flex items-center">
-          <a href="feedbackloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FEEDBACK</a>
+          <a href="feedback.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FEEDBACK</a>
         </li>
         <li class="flex items-baseline">
             <div class="dropdown">
@@ -205,17 +205,55 @@ if ($result3->num_rows > 0) {
     <div class="flex items-center justify-center h-auto mt-1">
     <div class="max-w-2xl w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
     <h1 class="text-3xl font-semibold mb-6 text-center">Settings</h1>
-    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name:</label>
-    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo $fetch_info['name']; ?></div>
-    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email:</label>
-    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo $fetch_info['email']; ?></div>
-    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number:</label>
-    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><?php echo $fetch_info['phone_number']; ?></div>
-    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password:</label>
-    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">********</div>
-    <div class="mt-6">
     <form action="settingschange.php" method="POST">
-    <input type="submit" name="editprofile" value="Edit" class="cursor-pointer form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded"/>
+    <?php
+    if(count($errors) == 1){
+    ?>
+    <div class="alert alert-danger text-center">
+    <?php
+    foreach($errors as $showerror){
+    echo $showerror;
+    }
+    ?>
+    </div>
+    <?php
+    }else if(count($errors) > 1){
+    ?>
+    <div class="alert alert-danger">
+    <?php
+    foreach($errors as $showerror){
+        ?>
+        <li><?php echo $showerror; ?></li>
+    <?php
+    }
+    ?>
+</div>
+    <?php
+    }
+    ?>
+    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name:</label>
+    <input type="text" name="changename" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $fetch_info['name']; ?>" required/>
+    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email:</label>
+    <input type="text" name="changeemail" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $fetch_info['email']; ?>" required/>
+    <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number:</label>
+    <input type="text" name="changephoneno" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $fetch_info['phone_number']; ?>" required/>
+    <div class="mt-6 form-group">
+    <label for="password" class="block text-gray-700 font-medium">New Password:</label>
+    <input type="password" id="password" name="changepassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your password">
+    </div>
+    <div class="mt-6 form-group">
+    <label for="cfm_password" class="block text-gray-700 font-medium">Confirm Password</label>
+    <input type="password" id="cfm_password" name="changecfm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Re-enter your password">
+    </div>
+    <?php
+    $userpass=$fetch_info['password'];
+    $userid5=$fetch_info['id'];
+    ?>
+    <input type="hidden" name="nochangepass" value="<?=$userpass?>"/>
+    <input type="hidden" name="settingsid" value="<?=$uesrid5?>"/>
+    <div class="mt-6">
+    <input type="submit" name="submitprofile" value="Continue" class="mt-6 cursor-pointer form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded"/>
+    </div>
     </form>
     </div>   
     </div>
