@@ -58,39 +58,33 @@
   </div>
 </nav>
 
-<div class="flex justify-center items-center h-60vh">
+<div class="flex justify-center items-center h-40 mt-4">
+    <a href="#" class="flex flex-col items-center bg-blue-400 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl relative" style="min-width: 80%;">
+        <img class="object-fill w-full h-64 md:h-auto md:w-64 md:rounded-none md:rounded-l-lg" src="Resources/image.png" alt="">
+        <div class="flex flex-col justify-between p-4 leading-normal">
+            <h2 class="mb-2 text-2xl font-bold tracking-tight text-white">Make a booking today!</h2>
+            <p class="mb-3 font-3xl text-white">Everything is easier with Kiasu Library, the first-ever library assistant implemented to make your day easier!</p>
+            <!-- Button added here -->
+            <button class="px-3 py-1 mt-4 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300" onclick="redirectTobooking()">
+                Book Now!
+            </button>
+        </div>
+    </a>
+</div>
     
-<a href="#" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="Resources/image.png" alt="">
-    <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-    </div>
-</a>
-
-</div>
-<div class="flex justify-center items-center h-60vh">
-  <!-- Image container with relative position -->
-  <div class="relative mt-8 mb-8"> <!-- Add 'mt-8' for margin-top and 'mb-8' for margin-bottom -->
-      <img src="Resources/bookingtab.png" alt="tab1" class="block w-1100px h-auto mx-auto">
-      <!-- Button overlay with absolute position -->
-      <div class="relative">
-          <a href="login.php" type="button" class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-1/5 h-auto font-semibold text-xs md:text-sm lg:text-xl">Book now!</a>
-      </div>
-  </div>
-</div>
-<div class="flex justify-center items-center h-60vh">
-  <!-- Image container with relative position -->
-  <div class="relative mt-8 mb-8"> <!-- Add 'mt-8' for margin-top and 'mb-8' for margin-bottom -->
-      <img src="Resources/findertab.png" alt="tab1" class="block w-1100px h-auto mx-auto">
-      <!-- Button overlay with absolute position -->
-      <div class="relative">
-        <button class="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-1/5 h-auto font-semibold text-xs md:text-sm lg:text-xl">
-            Find Us!
-        </button>
-      </div>
-  </div>
-</div>
+<div class="flex justify-center items-center h-40 mt-8">
+    <a href="#" class="flex flex-col items-center bg-blue-400 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl relative" style="min-width: 80%;">
+        <img class="object-fill w-full h-64 md:h-auto md:w-64 md:rounded-none md:rounded-l-lg" src="Resources/image2.png" alt="">
+        <div class="flex flex-col justify-between p-4 leading-normal">
+            <h2 class="mb-2 text-2xl font-bold tracking-tight text-white">Locate a library near you!</h2>
+            <p class="mb-3 font-3xl text-white">Locate a suitable library near you through library finder! Why go through all the effort to navigate your way here?</p>
+            <!-- Button added here -->
+            <button class="px-3 py-1 mt-4 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300" onclick="redirectTofinder()">
+                Find Us!
+            </button>
+        </div>
+    </a>
+</div>    
     
 <div  class="chat-box">
   <div class="chat-box-header">
@@ -126,5 +120,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="chatbot.js"></script>
+<script>
+    function redirectTobooking() {
+        // Get the current page name
+        var currentPage = window.location.pathname.split("/").pop();
+
+        // Check if the current page is "home.php"
+        if (currentPage === "home.php") {
+            window.location.href = "bookings.php"; // Replace with the actual URL
+        }
+        else {
+            window.location.href = "bookingsloggedinnew.php";
+        }
+    }
+    
+    function redirectTofinder() {
+            window.location.href = "library_finder.php";
+    }
+</script>
 </body>
 </html>
