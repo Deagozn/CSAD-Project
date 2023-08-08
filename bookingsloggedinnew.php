@@ -128,10 +128,10 @@ if($email != false && $password != false){
         <div class="mb-6">
         <label for="library" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Library</label>
         <select id="library" name="library" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-            <option value="QtL"             <?php if (isset($_POST['library']) && $_POST['library'] == 'QtL') { echo 'selected="selected"'; } ?> >Queenstown Public Library</option>
-            <option value="JurongLibrary"   <?php if (isset($_POST['library']) && $_POST['library'] == 'JurongLibrary') { echo 'selected="selected"'; } ?> >Jurong Regional Library</option>
-            <option value="BedokLibrary"    <?php if (isset($_POST['library']) && $_POST['library'] == 'BedokLibrary') { echo 'selected="selected"'; } ?> >Bedok Public Library</option>
-            <option value="TampinesLibrary" <?php if (isset($_POST['library']) && $_POST['library'] == 'TampinesLibrary') { echo 'selected="selected"'; } ?> >Tampines Regional Library</option>
+            <option value="Queenstown Public Library"             <?php if (isset($_POST['library']) && $_POST['library'] == 'QtL') { echo 'selected="selected"'; } ?> >Queenstown Public Library</option>
+            <option value="Jurong Regional Library"   <?php if (isset($_POST['library']) && $_POST['library'] == 'JurongLibrary') { echo 'selected="selected"'; } ?> >Jurong Regional Library</option>
+            <option value="Bedok Public Library"    <?php if (isset($_POST['library']) && $_POST['library'] == 'BedokLibrary') { echo 'selected="selected"'; } ?> >Bedok Public Library</option>
+            <option value="Tampines Regional Library" <?php if (isset($_POST['library']) && $_POST['library'] == 'TampinesLibrary') { echo 'selected="selected"'; } ?> >Tampines Regional Library</option>
         </select>
 
         </div>

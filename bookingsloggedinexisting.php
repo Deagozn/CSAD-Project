@@ -195,13 +195,14 @@ if ($result3->num_rows > 0) {
 </nav>
 <div>
     <div class="flex items-center justify-center h-auto mt-1">
-    <div class="max-w-2xl w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
+    <div class="max-w-3xl w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
     <h1 class="text-3xl font-semibold mb-6 text-center">Bookings</h1>
     <?php
     if(!empty($row3)){
     ?>
     <table class="mx-auto">
         <tr style="border:2px solid black;">
+            <td style="border:2px solid black; padding: 5px">Library</td>
             <td style="border:2px solid black; padding: 5px">Date</td>
             <td style="border:2px solid black; padding: 5px">Timing</td>
             <td style="border:2px solid black; padding: 5px">Seat Number</td>
@@ -209,6 +210,7 @@ if ($result3->num_rows > 0) {
             <td style="border:2px solid black; padding: 5px">Delete</td>
         </tr><?php foreach ($row3 as $row4) {?>
         <tr style="border:2px solid black;">
+        <td style="border:2px solid black; padding: 5px"><?php echo $row4['library']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['date']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['timing']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['seatnumber']?></td>

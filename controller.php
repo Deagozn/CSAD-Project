@@ -195,6 +195,7 @@ if(isset($_POST['create_account'])){
         ]);
 
         // Retrieve the values from the form
+        $library=$_POST['library'];
         $userid2 = $_POST['userid3'];
         $date = $_POST['bookingdate'];
         $timing = $_POST['timing'];
@@ -202,8 +203,8 @@ if(isset($_POST['create_account'])){
         $books = $_POST['bookselected'];
 
         // Prepare the INSERT query
-        $insert_booking = "INSERT INTO userbooking (date, id, timing, seatnumber, books)
-                        VALUES (:date, :userid, :timing, :seatno, :books)";
+        $insert_booking = "INSERT INTO userbooking (date, id, timing, seatnumber, books, library)
+                        VALUES (:date, :userid, :timing, :seatno, :books, :library)";
 
         // Create a prepared statement
         $stmt = $pdo->prepare($insert_booking);
@@ -214,6 +215,7 @@ if(isset($_POST['create_account'])){
         $stmt->bindParam(':timing', $timing);
         $stmt->bindParam(':seatno', $seatno);
         $stmt->bindParam(':books', $books);
+        $stmt->bindParam(':library',$library);
         $stmt->execute();
 
         // If the execution is successful, the data should now be in the database
@@ -266,7 +268,7 @@ if (isset($_POST['completebooking'])) {
             // Execute the UPDATE query
             $stmt_update->execute();
             
-            $userbookings_query="SELECT date, timing, books FROM userbooking WHERE id= :userid";
+            $userbookings_query="SELECT date, timing, books, library FROM userbooking WHERE id= :userid";
             $stmt_prev_data=$pdo->prepare($userbookings_query);
             $stmt_prev_data->bindParam(':userid', $userid4);
             $stmt_prev_data->execute();
@@ -274,7 +276,7 @@ if (isset($_POST['completebooking'])) {
             
             if ($userbookings_data){
                 
-                $userbooking_insert="INSERT INTO userbooking (date,id,timing,seatnumber,books) VALUES (:date, :userid, :timing, :seatno, :books)";
+                $userbooking_insert="INSERT INTO userbooking (date,id,timing,seatnumber,books,library) VALUES (:date, :userid, :timing, :seatno, :books, :library)";
                 $stmt_insert= $pdo->prepare($userbooking_insert);
                 
                 for($i=1;$i < count($reservation_data);$i++){
@@ -284,6 +286,7 @@ if (isset($_POST['completebooking'])) {
                     $stmt_insert->bindParam(':timing', $userbookings_data['timing']);
                     $stmt_insert->bindParam(':seatno', $seatno);
                     $stmt_insert->bindParam(':books', $userbookings_data['books']);
+                    $stmt_insert->bindParam(':library', $userbookings_data['library']);
 
                     // Execute the INSERT query
                     $stmt_insert->execute();
