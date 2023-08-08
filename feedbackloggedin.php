@@ -71,10 +71,19 @@ if($email != false && $password != false){
           </div> 
         </li>
         <li class="flex items-center">
+          <a href="seatmaploggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">SEAT MAP</a>
+        </li>
+        <li class="flex items-center">
           <a href="feedbackloggedin.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">FEEDBACK</a>
         </li>
         <li class="flex items-baseline">
-           <h1 class="text-xl mb-1">Welcome Back, <span class="font-bold text-blue-700"><?php echo $fetch_info['name'];?></span>!</h1> 
+            <div class="dropdown">
+            <h1 class="text-xl mb-1">Welcome Back, <span class="font-bold text-blue-700"><?php echo $fetch_info['name'];?></span>!</h1>
+            <div class="dropdown-content">
+            <a href="settings.php">Settings</a>
+            <a href="home.php">Logout</a>
+            </div>
+            </div>
         </li>
       </ul>
     </div>  
