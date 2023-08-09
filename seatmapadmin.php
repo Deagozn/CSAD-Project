@@ -1,3 +1,27 @@
+<?php require_once"controller.php";?>
+<?php 
+$email = $_SESSION['email'];
+$password = $_SESSION['password'];
+if($email != false && $password != false){
+    $sql = "SELECT * FROM usertable WHERE email = '$email'";
+    $run_Sql = mysqli_query($con, $sql);
+    if($run_Sql){
+        $fetch_info = mysqli_fetch_assoc($run_Sql);
+        $status = $fetch_info['status'];
+        $code = $fetch_info['code'];
+        if($status == "verified"){
+            if($code != 0){
+                header('Location: resetpasswordotp.php');
+            }
+        }else{
+            header('Location: userotp.php');
+        }
+    }
+}else{
+    header('Location: login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,13 +49,13 @@
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-indigo-100 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-indigo-100 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li class="flex items-center">
-          <a href="admindashboard.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">DASHBOARD</a>
+          <a href="admindashboard.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">DASHBOARD</a>
         </li>
         <li class="flex items-center">
           <a href="booksadmin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">BOOKS</a>
         </li>
         <li class="flex items-center">
-          <a href="seatmapadmin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">SEAT MAP</a>
+          <a href="seatmapadmin.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">SEAT MAP</a>
         </li>
         <li class="flex items-center">
           <div class="dropdown">
@@ -51,6 +75,69 @@
   </div>
 </nav>
 <div>
+    <div class="flex items-center justify-center h-auto mt-1">
+    <div class="max-w-md w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
+    <h1 class="text-3xl font-semibold mb-6 text-center">Bookings</h1>
+   <?php
+    $sessid = 1;
+
+    // (B) GET SESSION SEATS
+    $seats = $_RSV->get($sessid);
+    ?>
+
+    <!-- (C) DRAW SEATS LAYOUT -->
+    <div style="    
+    position: absolute;
+    margin-left: 104px;
+    text-align: center;
+    background-color: white;
+    width: 175px;
+    height: 150px;
+    border:2px solid black;
+    z-index: 2;
+    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;">Table</div>
+    <div id="layout" ><?php
+    foreach (array_slice($seats,0,4) as $s) {
+      $taken = is_numeric($s["user_id"]);
+      printf("<div class='seat%s'%s>%s</div>",
+        $taken ? " taken" : "",
+        $taken ? "" : " onclick='reserve.toggle(this)'",
+        $s["seat_id"]
+      );
+    }
+    ?></div>
+    <div style="    
+    position: absolute;
+    margin-left: 104px;
+    text-align: center;
+    background-color: white;
+    width: 175px;
+    height: 150px;
+    border:2px solid black;
+    z-index: 2;
+    margin-top: 10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;">Table</div>
+    <div id="layout" ><?php
+    foreach (array_slice($seats,4,4) as $s) {
+      $taken = is_numeric($s["user_id"]);
+      printf("<div class='seat%s'%s>%s</div>",
+        $taken ? " taken" : "",
+        $taken ? "" : " onclick='reserve.toggle(this)'",
+        $s["seat_id"]
+      );
+    }
+    ?></div>
+    </div>
+    </div>
     
 </div>
 
