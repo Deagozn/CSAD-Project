@@ -1,4 +1,76 @@
 <?php require_once"controller.php";?>
+<?php
+if(isset($_POST['submitprofile'])){    
+        
+        //changing name and phone number only
+
+        $userid6 = $_POST['settingsid'];
+        $current_email=$_POST['settingsemail'];
+        $change_name = mysqli_real_escape_string($con,$_POST['changename']);
+        $change_email = mysqli_real_escape_string($con,$_POST['changeemail']);
+        $change_phone_number = mysqli_real_escape_string($con,$_POST['changephoneno']);
+        
+        //change name and phone number only
+        $update_profile = "UPDATE usertable SET name='$change_name', phone_number='$change_phone_number' WHERE id= $userid6";
+        $run_query2 = mysqli_query($con, $update_profile);
+        if ($run_query2) {
+            $success['updateprofile'] = "Profile Updated!";
+        }
+
+        $nochangepassword = $_POST['nochangepass'];
+        $old_password = mysqli_real_escape_string($con, $_POST['old_password']);
+        $new_password = mysqli_real_escape_string($con, $_POST['changepassword']);
+        $new_cpassword = mysqli_real_escape_string($con, $_POST['changecfm_password']);
+
+        // change password only
+        if (!empty($new_password) || !empty($new_cpassword) || !empty($old_password)) {
+            if (!password_verify($old_password, $nochangepassword)) {
+                $errors['password'] = "Old password not matched!";
+            } else if ($new_password !== $new_cpassword) {
+                $errors['password'] = "Confirm password not matched!";
+            } else {
+                // changing password only
+                $new_password_hashed = password_hash($new_cpassword, PASSWORD_BCRYPT);
+                $update_password = "UPDATE usertable SET password='$new_password_hashed' WHERE id = $userid6";
+                $run_query = mysqli_query($con, $update_password);
+                if ($run_query) {
+                    $success['successchange'] = "Password Change Successfully!";
+                } else {
+                    $errors['db-error'] = "Failed to Change Password!";
+                }
+            }
+        }
+        $email_check = "SELECT * FROM usertable WHERE email = '$change_email'";
+        $res = mysqli_query($con, $email_check);
+        if(mysqli_num_rows($res) > 0 && $change_email!==$current_email){
+            $errors['email'] = "Email that you have entered is already exist!";
+        }else if($change_email!==$current_email){
+            $code = rand(999999, 111111);
+            $status = "notverified";
+            $update_email="UPDATE usertable SET email='$change_email', status='$status', code='$code' WHERE id = $userid6";
+            $data_check = mysqli_query($con, $update_email);
+            if($data_check){
+                $email=$_POST['changeemail'];
+                $subject = "Email Verification Code";
+                $message = "Your verification code is $code";
+                $sender = "From: NoReply.KiasuLibrary@gmail.com";
+                //Php code to send email
+                if(mail($email, $subject, $message, $sender)){
+                    $info = "We've sent a verification code to your email - $email";
+                    $_SESSION['info'] = $info;
+                    $_SESSION['email'] = $email;
+                    $_SESSION['password'] = $password;
+                    header('location: userotp.php');
+                    exit();
+                }else{
+                    $errors['otp-error'] = "Failed while sending code!";
+                }
+            }else{
+                $errors['db-error'] = "Failed while inserting data into database!";
+            }
+        }
+     }
+?>
 <?php 
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
@@ -19,52 +91,6 @@ if($email != false && $password != false){
     }
 }else{
     header('Location: login.php');
-}
-?>
-<?php
-if (isset($_POST['deletebooking'])) {
-    $servername2 = "localhost";
-    $username2 = "root";
-    $password2 = "";
-    $dbname2 = "userform";
-
-    // Connect to the database
-    $conn2 = new mysqli($servername2, $username2, $password2, $dbname2);
-
-    if ($conn2->connect_error) {
-        $errorMsg = "Failed to connect to MySQL: " . $conn2->connect_error;
-        console_log($errorMsg);
-        exit();
-    }
-
-    $booking_id = $_POST['booking_id'];
-    // Prepare the delete query using prepared statements for userbooking table
-    $stmt = $conn2->prepare("DELETE FROM userbooking WHERE booking_id = ?");
-    $stmt->bind_param("i", $booking_id); // Assuming booking_id is an integer, use "i" for integer parameter binding
-    $result = $stmt->execute();
-
-    if ($result) {
-        // Successfully deleted the booking from userbooking table
-        // Now proceed to delete from reservations table
-        $seatnum = $_POST['seatno'];
-        $stmt2 = $conn2->prepare("DELETE FROM reservations WHERE seat_id = ?");
-        $stmt2->bind_param("s", $seatnum);
-        $result2 = $stmt2->execute();
-
-        if ($result2) {
-            // Successfully deleted the booking from reservations table
-            header("Location: bookingsloggedinexisting.php"); // Redirect to the table view page after deletion
-            exit();
-        } else {
-            // Handle the deletion error for reservations table
-            $errorMsg = "Failed to delete booking from reservations: " . $conn2->error;
-            console_log($errorMsg); // Assuming you have a function for logging errors
-        }
-    } else {
-        // Handle the deletion error for userbooking table
-        $errorMsg = "Failed to delete booking from userbooking: " . $conn2->error;
-        console_log($errorMsg); // Assuming you have a function for logging errors
-    }
 }
 ?>
 
@@ -183,7 +209,7 @@ if ($result3->num_rows > 0) {
           </div>        
         </li>
         <li class="flex items-center">
-          <a href="seatmaploggedin.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">SEAT MAP</a>
+          <a href="seatmaploggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">SEAT MAP</a>
         </li>
         <li class="flex items-center">
           <a href="feedback.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FEEDBACK</a>
@@ -205,7 +231,7 @@ if ($result3->num_rows > 0) {
     <div class="flex items-center justify-center h-auto mt-1">
     <div class="max-w-2xl w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
     <h1 class="text-3xl font-semibold mb-6 text-center">Settings</h1>
-    <form action="settingschange.php" method="POST">
+    <form action="settingschange.php" method="POST" enctype="multipart/form-data">
     <?php
     if(count($errors) == 1){
     ?>
@@ -227,7 +253,31 @@ if ($result3->num_rows > 0) {
     <?php
     }
     ?>
-</div>
+    </div>
+    <?php
+    }
+    ?>
+    <?php 
+    if (count($success)==1){
+    ?>
+    <div class="alert alert-success text-center">
+    <?php foreach($success as $showsuccess){
+        echo $showsuccess; 
+    }
+    ?>
+    </div>
+    <?php
+    }else if(count($success) > 1){
+    ?>
+    <div class="alert alert-success text-center">
+    <?php
+    foreach($success as $showsuccess){
+        ?>
+        <li><?php echo $showsuccess; ?></li>
+    <?php
+    }
+    ?>
+    </div>
     <?php
     }
     ?>
@@ -238,8 +288,12 @@ if ($result3->num_rows > 0) {
     <label class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number:</label>
     <input type="text" name="changephoneno" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?php echo $fetch_info['phone_number']; ?>" required/>
     <div class="mt-6 form-group">
+    <label class="block text-gray-700 font-medium" for="old_password">Old Password:</label>
+    <input type="password" id="old_password" name="old_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter old password to create new password">
+    </div>
+    <div class="mt-6 form-group">
     <label for="password" class="block text-gray-700 font-medium">New Password:</label>
-    <input type="password" id="password" name="changepassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your password">
+    <input type="password" id="password" name="changepassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your new password">
     </div>
     <div class="mt-6 form-group">
     <label for="cfm_password" class="block text-gray-700 font-medium">Confirm Password</label>
@@ -248,11 +302,13 @@ if ($result3->num_rows > 0) {
     <?php
     $userpass=$fetch_info['password'];
     $userid5=$fetch_info['id'];
+    $useremail=$fetch_info['email'];
     ?>
     <input type="hidden" name="nochangepass" value="<?=$userpass?>"/>
-    <input type="hidden" name="settingsid" value="<?=$uesrid5?>"/>
+    <input type="hidden" name="settingsid" value="<?=$userid5?>"/>
+    <input type="hidden" name="settingsemail" value="<?=$useremail?>"/>
     <div class="mt-6">
-    <input type="submit" name="submitprofile" value="Continue" class="mt-6 cursor-pointer form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded"/>
+    <input type="submit" name="submitprofile" value="Update Profile" class="mt-6 cursor-pointer form-control button w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded"/>
     </div>
     </form>
     </div>   
