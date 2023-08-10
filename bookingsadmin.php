@@ -106,13 +106,13 @@ if (isset($_POST['deletebooking'])) {
     }   
 ?>
 <?php
-$servername2 = "localhost";
-$username2 = "root";
-$password2 = "";
-$dbname2 = "userform";
+$servername3 = "localhost";
+$username3 = "root";
+$password3 = "";
+$dbname3 = "userform";
 
 // connect the database with the server
-$conn3 = new mysqli($servername2, $username2, $password2, $dbname2);
+$conn3 = new mysqli($servername3, $username3, $password3, $dbname3);
 
 // if an error occurs
 if ($conn3->connect_errno) {
@@ -121,8 +121,7 @@ if ($conn3->connect_errno) {
     exit();
 }
 
-$userid = $fetch_info['id'];
-$sql3 = "SELECT * FROM userbooking WHERE id = $userid"; // Use named placeholder :userid
+$sql3 = "SELECT * FROM userbooking" ; // Use named placeholder :userid
 $result3 = $conn3->query($sql3);
 
 // Declare an array to store the data from the database.
@@ -148,9 +147,9 @@ if ($result3->num_rows > 0) {
 </head>
 <body class="bg-auto bg-repeat " style="background-image: url('Resources/book-background.png')">
 
-<nav class="sticky top-0 bg-indigo-100 border-blue-200 dark:bg-gray-900" style="z-index: 4; box-shadow: 0 0 0 1px #86b9f7;">
+<nav class="sticky top-0 bg-indigo-100 border-blue-200 dark:bg-gray-900 w-full" style=" z-index: 4; box-shadow: 0 0 0 1px #86b9f7;">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="homeloggedin.php" class="flex items-center">
+    <a href="admindashboard.php" class="flex items-center">
         <img src="Resources/logo-no-background.png" class="h-20 mr-5" alt="Kiasu Library Logo" />
     </a>
     <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -162,42 +161,32 @@ if ($result3->num_rows > 0) {
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-indigo-100 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-indigo-100 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li class="flex items-center">
-          <a href="homeloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">HOME</a>
+          <a href="admindashboard.php" class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-indigo-100 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-indigo-100 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">DASHBOARD</a>
+        </li>
+        <li class="flex items-center">
+          <a href="booksadmin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">BOOKS</a>
+        </li>
+        <li class="flex items-center">
+          <a href="seatmapadmin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">SEAT MAP</a>
         </li>
         <li class="flex items-center">
           <div class="dropdown">
-          <button class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">BOOKINGS</button>
+          <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FEEDBACK</button>
             <div class="dropdown-content">
-            <a href="bookingsloggedinnew.php">New Bookings</a>
-            <a href="bookingsloggedinexisting.php" >Existing Bookings</a>
+            <a href="feedbackbug.php">BUGS</a>
+            <a href="feedbackmain.php" >FEEDBACK</a>
+            <a href="feedbackothers.php" >OTHERS</a>
             </div>
         </div> 
         </li>
-        <li class="flex items-center">
-          <div class="dropdown">
-          <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" >LIBRARY FINDER</button>
-            <div class="dropdown-content">
-            <a href="library_finderloggedin.php">Locator</a>
-            <a href="Library_Directionsloggedin.php">Directions</a>
-            </div>
-          </div> 
-        </li>
-        <li class="flex items-center">
-          <a href="seatmaploggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">SEAT MAP</a>
-        </li>
-        <li class="flex items-center">
-          <a href="feedbackloggedin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FEEDBACK</a>
-        </li>
         <li class="flex items-baseline">
             <div class="dropdown">
-            <h1 class="text-xl mb-1">Welcome Back, <span class="font-bold text-blue-700"><?php echo $fetch_info['name'];?></span>!</h1>
+            <h1 class="text-xl mb-1">Welcome Back, <span class="font-bold text-blue-700">Admin</span>!</h1>
             <div class="dropdown-content">
-            <a href="settings.php">Settings</a>
             <a href="home.php">Logout</a>
             </div>
             </div>
         </li>
-
       </ul>
     </div>  
   </div>
@@ -211,20 +200,22 @@ if ($result3->num_rows > 0) {
     ?>
     <table class="mx-auto">
         <tr style="border:2px solid black;">
+            <td style="border:2px solid black; padding: 5px">Time Booked</td>
             <td style="border:2px solid black; padding: 5px">Library</td>
             <td style="border:2px solid black; padding: 5px">Date</td>
             <td style="border:2px solid black; padding: 5px">Timing</td>
             <td style="border:2px solid black; padding: 5px">Seat Number</td>
             <td style="border:2px solid black; padding: 5px">Books</td>
-            <td style="border:2px solid black; padding: 5px">Delete</td>
-        </tr><?php foreach ($row3 as $row4) {?>
+            <td style="border:2px solid black; padding: 8px">Delete</td>
+        </tr><?php foreach (array_reverse($row3) as $row4) {?>
         <tr style="border:2px solid black;">
+        <td style="border:2px solid black; padding: 5px"><?php echo $row4['create_time']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['library']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['date']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['timing']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['seatnumber']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['books']?></td>
-        <td style="border:2px solid black; padding: 5px">
+        <td style="border:2px solid black; padding: 8px">
             <form action="bookingsloggedinexisting.php" method="POST">
                 <input type="hidden" name="booking_id" value="<?php echo $row4['booking_id']; ?>">
                 <input type="hidden" name="seatno" value="<?php echo $row4['seatnumber']; ?>">

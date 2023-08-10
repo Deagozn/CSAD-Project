@@ -200,7 +200,12 @@
         </div> 
         </li>
         <li class="flex items-baseline">
+            <div class="dropdown">
             <h1 class="text-xl mb-1">Welcome Back, <span class="font-bold text-blue-700">Admin</span>!</h1>
+            <div class="dropdown-content">
+            <a href="home.php">Logout</a>
+            </div>
+            </div>
         </li>
       </ul>
     </div>  

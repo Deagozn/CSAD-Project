@@ -25,7 +25,7 @@
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-indigo-100 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-indigo-100 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li class="flex items-center">
-          <a href="admindashboard.php" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">DASHBOARD</a>
+          <a href="admindashboard.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">DASHBOARD</a>
         </li>
         <li class="flex items-center">
           <a href="booksadmin.php" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">BOOKS</a>
@@ -35,7 +35,7 @@
         </li>
         <li class="flex items-center">
           <div class="dropdown">
-          <button class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FEEDBACK</button>
+          <button class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">FEEDBACK</button>
             <div class="dropdown-content">
             <a href="feedbackbug.php">BUGS</a>
             <a href="feedbackmain.php" >FEEDBACK</a>
@@ -44,7 +44,12 @@
         </div> 
         </li>
         <li class="flex items-baseline">
+            <div class="dropdown">
             <h1 class="text-xl mb-1">Welcome Back, <span class="font-bold text-blue-700">Admin</span>!</h1>
+            <div class="dropdown-content">
+            <a href="home.php">Logout</a>
+            </div>
+            </div>
         </li>
       </ul>
     </div>  

@@ -69,7 +69,12 @@ if($email != false && $password != false){
         </div> 
         </li>
         <li class="flex items-baseline">
+            <div class="dropdown">
             <h1 class="text-xl mb-1">Welcome Back, <span class="font-bold text-blue-700">Admin</span>!</h1>
+            <div class="dropdown-content">
+            <a href="home.php">Logout</a>
+            </div>
+            </div>
         </li>
       </ul>
     </div>  
@@ -213,7 +218,7 @@ if($email != false && $password != false){
             </ul>
         </div>
         <a
-          href="#"
+          href="bookingsadmin.php"
           class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
           View Bookings
           <svg class="w-2.5 h-2.5 ml-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">

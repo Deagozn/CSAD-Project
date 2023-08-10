@@ -302,4 +302,5 @@ if (isset($_POST['completebooking'])) {
     header("Location: bookingsloggedinexisting.php");
 }
 
+
 ?>
