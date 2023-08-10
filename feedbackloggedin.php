@@ -92,6 +92,7 @@ if($email != false && $password != false){
 <div class="flex items-center justify-center h-screen mt-1">
     <div class="max-w-md w-full mx-4 bg-white rounded-lg border border-black shadow-lg p-8">
     <h1 class="text-3xl font-semibold mb-6">Feedback</h1>
+    <h2 class="my-6 text-gray-500 dark:text-gray-400">Your feedback is fully anonymous.</h2>
     <form id="feedback_form">
       <div class="mb-6">
         <label for="feedback_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Feedback Type</label>

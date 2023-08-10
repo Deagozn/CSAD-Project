@@ -170,5 +170,38 @@ if($email != false && $password != false){
     }
     }
 </script>
+<footer class="mt-10 mb-0 p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
+  <div class="mx-auto max-w-screen-xl text-center">
+      <a href="home.php" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
+          <img class="mr-2 h-8" src="Resources/logo-no-background.png" alt="logo">
+          Kiasu Library    
+      </a>
+      <p class="my-6 text-gray-500 dark:text-gray-400">A library-goer's best friend.</p>
+      <ul class="flex flex-wrap justify-center items-center mb-10 text-gray-900 dark:text-white">
+          <li>
+              <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+          </li>
+          <li>
+              <a href="feedbackloggedin.php" class="mr-4 hover:underline md:mr-6">Feedback</a>
+          </li>
+          <li>
+              <a href="#" class="mr-4 hover:underline md:mr-6 ">Campaigns</a>
+          </li>
+          <li>
+              <a href="bookingsloggedinnew.php" class="mr-4 hover:underline md:mr-6">Book now</a>
+          </li>
+          <li>
+              <a href="library_finderloggedin.php" class="mr-4 hover:underline md:mr-6">Find us</a>
+          </li>
+          <li>
+              <a href="#" class="mr-4 hover:underline md:mr-6">FAQs</a>
+          </li>
+          <li>
+              <p class="mr-4 md:mr-6">Contact</p>
+          </li>
+      </ul>
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022-2023 <a href="#" class="hover:underline">Kiasu Library™</a>. All Rights Reserved.</span>
+  </div>
+</footer>
 </body>
 </html>
