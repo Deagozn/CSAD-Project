@@ -249,48 +249,85 @@ if (isset($_POST['completebooking'])) {
         $stmt = $pdo->prepare($reservation_query);
         $stmt->bindParam(':userid', $userid4);
         $stmt->execute();
-        $reservation_data = $stmt->fetchAll();
+        $reservation_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if ($reservation_data) {
-            
-            // Seat number found, update the 'userbooking' table
-            $seatno = $reservation_data[0]['seat_id'];
+            $userbooking_query = "SELECT * FROM userbooking WHERE id = $userid4";
+            $select_query = mysqli_query($con, $userbooking_query);
 
-            // Prepare the UPDATE query
-            $update_booking_first_row = "UPDATE userbooking SET seatnumber = :seatno WHERE id = :userid";
+            if (mysqli_num_rows($select_query) > 1) {
+                // find newly added booking details
+                    $userbooking_query2="SELECT * FROM userbooking WHERE id= $userid4 and seatnumber=1";
+                    $check_query=mysqli_query($con,$userbooking_query2);
+                    $fetch_booking= mysqli_fetch_assoc($check_query);
+                //check which seat is already taken and insert the ones that are not taken
+                    for($i=0;$i<count($reservation_data);$i++){
+                        $seatnumber=$reservation_data[$i]['seat_id'];
+                        $selected_query="SELECT * FROM userbooking WHERE id=$userid4 and seatnumber='$seatnumber'";
+                        $check_booking=mysqli_query($con,$selected_query);
+                        //if seat booked do nothing else insert new data
+                        if(mysqli_num_rows($check_booking)>0){
+                            
+                        }else{
+                            $delete_seatnumber = '1';
+                            $stmt_delete2=$con->prepare("DELETE FROM userbooking where id=? and seatnumber=?");
+                            $stmt_delete2->bind_param("is",$userid4,$delete_seatnumber);
+                            $stmt_delete2->execute();
+                            $stmt_delete2->close();
+                            
+                            $insert_newbooking="INSERT INTO userbooking (date,id,timing,seatnumber,books,library) VALUES (:date, :userid, :timing, :seatno, :books, :library)";
+                            $stmt_insert2= $pdo->prepare($insert_newbooking);
+                            $stmt_insert2->bindParam(':date', $fetch_booking['date']);
+                            $stmt_insert2->bindParam(':userid', $userid4);
+                            $stmt_insert2->bindParam(':timing', $fetch_booking['timing']);
+                            $stmt_insert2->bindParam(':seatno', $seatnumber);
+                            $stmt_insert2->bindParam(':books', $fetch_booking['books']);
+                            $stmt_insert2->bindParam(':library', $fetch_booking['library']);
 
-            // Create a prepared statement for the UPDATE query
-            $stmt_update = $pdo->prepare($update_booking_first_row);
+                            // Execute the INSERT query
+                            $stmt_insert2->execute();
+                        }
+                    }
 
-            // Bind the parameters for the update query
-            $stmt_update->bindParam(':seatno', $seatno);
-            $stmt_update->bindParam(':userid', $userid4);
+            } else {
+                // Seat number found, update the 'userbooking' table
+                $seatno = $reservation_data[0]['seat_id'];
 
-            // Execute the UPDATE query
-            $stmt_update->execute();
-            
-            $userbookings_query="SELECT date, timing, books, library FROM userbooking WHERE id= :userid";
-            $stmt_prev_data=$pdo->prepare($userbookings_query);
-            $stmt_prev_data->bindParam(':userid', $userid4);
-            $stmt_prev_data->execute();
-            $userbookings_data= $stmt_prev_data->fetch();
-            
-            if ($userbookings_data){
-                
-                $userbooking_insert="INSERT INTO userbooking (date,id,timing,seatnumber,books,library) VALUES (:date, :userid, :timing, :seatno, :books, :library)";
-                $stmt_insert= $pdo->prepare($userbooking_insert);
-                
-                for($i=1;$i < count($reservation_data);$i++){
-                    $seatno = $reservation_data[$i]['seat_id']; 
-                    $stmt_insert->bindParam(':date', $userbookings_data['date']);
-                    $stmt_insert->bindParam(':userid', $userid4);
-                    $stmt_insert->bindParam(':timing', $userbookings_data['timing']);
-                    $stmt_insert->bindParam(':seatno', $seatno);
-                    $stmt_insert->bindParam(':books', $userbookings_data['books']);
-                    $stmt_insert->bindParam(':library', $userbookings_data['library']);
+                // Prepare the UPDATE query
+                $update_booking_first_row = "UPDATE userbooking SET seatnumber = :seatno WHERE id = :userid";
 
-                    // Execute the INSERT query
-                    $stmt_insert->execute();
+                // Create a prepared statement for the UPDATE query
+                $stmt_update = $pdo->prepare($update_booking_first_row);
+
+                // Bind the parameters for the update query
+                $stmt_update->bindParam(':seatno', $seatno);
+                $stmt_update->bindParam(':userid', $userid4);
+
+                // Execute the UPDATE query
+                $stmt_update->execute();
+
+                $userbookings_query = "SELECT date, timing, books, library FROM userbooking WHERE id = :userid";
+                $stmt_prev_data = $pdo->prepare($userbookings_query);
+                $stmt_prev_data->bindParam(':userid', $userid4);
+                $stmt_prev_data->execute();
+                $userbookings_data = $stmt_prev_data->fetch();
+
+                if ($userbookings_data) {
+                    $userbooking_insert = "INSERT INTO userbooking (date, id, timing, seatnumber, books, library) VALUES (:date, :userid, :timing, :seatno, :books, :library)";
+                    $stmt_insert = $pdo->prepare($userbooking_insert);
+
+                    for ($i = 1; $i < count($reservation_data); $i++) {
+                        $seatno = $reservation_data[$i]['seat_id'];
+                        $stmt_insert->bindParam(':date', $userbookings_data['date']);
+                        $stmt_insert->bindParam(':userid', $userid4);
+                        $stmt_insert->bindParam(':timing', $userbookings_data['timing']);
+                        $stmt_insert->bindParam(':seatno', $seatno);
+                        $stmt_insert->bindParam(':books', $userbookings_data['books']);
+                        $stmt_insert->bindParam(':library', $userbookings_data['library']);
+
+                        // Execute the INSERT query
+                        $stmt_insert->execute();
+                    }
                 }
             }
         }
@@ -301,6 +338,7 @@ if (isset($_POST['completebooking'])) {
     }
     header("Location: bookingsloggedinexisting.php");
 }
+
 
 
 ?>

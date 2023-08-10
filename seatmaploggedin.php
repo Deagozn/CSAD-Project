@@ -158,6 +158,10 @@ if($email != false && $password != false){
       );
     }
     ?></div>
+    <div id="legend">
+      <div class="seat"></div> <div class="txt">Available</div>
+      <div class="seat taken"></div> <div class="txt">Taken</div>
+    </div>
     </div>
     </div>
     </div>
