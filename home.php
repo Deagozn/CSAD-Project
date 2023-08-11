@@ -208,7 +208,7 @@
       <p class="my-6 text-gray-500 dark:text-gray-400">A library-goer's best friend.</p>
       <ul class="flex flex-wrap justify-center items-center mb-10 text-gray-900 dark:text-white">
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+              <a href="about.php" class="mr-4 hover:underline md:mr-6 ">About</a>
           </li>
           <li>
               <a href="feedback.php" class="mr-4 hover:underline md:mr-6">Feedback</a>
