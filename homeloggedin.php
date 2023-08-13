@@ -89,23 +89,14 @@ if($email != false && $password != false){
     </div>  
   </div>
 </nav>
-<div class="flex justify-center items-center mt-10 mx-auto max-w-5xl p-4">
-        <!-- Centered YouTube Video -->
-        <div class="rounded-lg shadow-lg p-6" style="background-color: steelblue; margin-left: 0px;">
-            <h1 class="text-xl font-semibold mb-4 text-center"></h1>
-            <div class="aspect-w-16 aspect-h-9 flex items-center justify-center" style="">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/7_9U7jyEOyI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-<div class="flex justify-center items-center h-40 mt-4">
-    <a href="#" class="flex flex-col items-center bg-blue-400 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl relative" style="min-width: 80%;">
+<div class="flex justify-center items-center h-40 mt-8">
+    <a href="#" class="flex flex-col items-center bg-blue-400 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-3xl relative" style="min-width: 80%;">
         <img class="object-fill w-full h-64 md:h-auto md:w-64 md:rounded-none md:rounded-l-lg" src="Resources/image.png" alt="">
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h2 class="mb-2 text-2xl font-bold tracking-tight text-white">Make a booking today!</h2>
             <p class="mb-3 font-3xl text-white">Everything is easier with Kiasu Library, the first-ever library assistant implemented to make your day easier!</p>
             <!-- Button added here -->
-            <button class="px-3 py-1 mt-4 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300" onclick="redirectTobooking()">
+            <button class="px-3 py-1 mt-4 text-sm font-medium text-center text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300" onclick="redirectTofinder()">
                 Book Now!
             </button>
         </div>
@@ -113,7 +104,7 @@ if($email != false && $password != false){
 </div>
     
 <div class="flex justify-center items-center h-40 mt-8">
-    <a href="#" class="flex flex-col items-center bg-blue-400 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl relative" style="min-width: 80%;">
+    <a href="#" class="flex flex-col items-center bg-blue-400 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-3xl relative" style="min-width: 80%;">
         <img class="object-fill w-full h-64 md:h-auto md:w-64 md:rounded-none md:rounded-l-lg" src="Resources/image2.png" alt="">
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h2 class="mb-2 text-2xl font-bold tracking-tight text-white">Locate a library near you!</h2>
@@ -124,7 +115,143 @@ if($email != false && $password != false){
             </button>
         </div>
     </a>
-</div>    
+</div> 
+    
+    <div class="flex justify-center items-center mt-10 mx-auto max-w-5xl p-4">
+        <!-- Centered YouTube Video -->
+        <div class="rounded-lg shadow-lg p-6" style="background-color: steelblue; margin-left: 0px;">
+            <h1 class="text-xl font-semibold mb-4 text-center"></h1>
+            <div class="aspect-w-16 aspect-h-9 flex items-center justify-center" style="">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/7_9U7jyEOyI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+
+<div class="mt-8 flex justify-center items-center flex-wrap">
+    <div class="sm:hidden">
+        <label for="tabs" class="sr-only">Select tab</label>
+        <select id="tabs" class="bg-gray-100 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option>Statistics</option>
+            <option>Services</option>
+            <option>FAQ</option>
+        </select>
+    </div>
+    <ul class="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg dark:divide-gray-600 sm:flex dark:text-gray-400" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist" style="width:90%;">
+        <li class="w-full">
+            <button id="stats-tab" data-tabs-target="#stats" type="button" role="tab" aria-controls="stats" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-gray-50 hover:bg-gray-300 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Statistics</button>
+        </li>
+        <li class="w-full">
+            <button id="about-tab" data-tabs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="false" class="inline-block w-full p-4 bg-gray-50 hover:bg-gray-300 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Services</button>
+        </li>
+        <li class="w-full">
+            <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="false" class="inline-block w-full p-4 rounded-tr-lg bg-gray-50 hover:bg-gray-300 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">FAQ</button>
+        </li>
+    </ul>
+    <div style="width:90%;">
+    <div id="fullWidthTabContent" class="border-t border-gray-500 dark:border-gray-600">
+        <div class="hidden p-4 bg-gray-50 rounded-lg md:p-8 dark:bg-gray-800" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+            <dl class="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
+                <div class="flex flex-col items-center justify-center">
+                    <dt class="mb-2 text-3xl font-extrabold">73M+</dt>
+                    <dd class="text-gray-500 dark:text-gray-400">Users</dd>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <dt class="mb-2 text-3xl font-extrabold">100M+</dt>
+                    <dd class="text-gray-500 dark:text-gray-400">Bookings Made</dd>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <dt class="mb-2 text-3xl font-extrabold">1000s</dt>
+                    <dd class="text-gray-500 dark:text-gray-400">Investors</dd>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <dt class="mb-2 text-3xl font-extrabold">1B+</dt>
+                    <dd class="text-gray-500 dark:text-gray-400">Invested</dd>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <dt class="mb-2 text-3xl font-extrabold">90+</dt>
+                    <dd class="text-gray-500 dark:text-gray-400">Libraries</dd>
+                </div>
+                <div class="flex flex-col items-center justify-center">
+                    <dt class="mb-2 text-3xl font-extrabold">4M+</dt>
+                    <dd class="text-gray-500 dark:text-gray-400">Books</dd>
+                </div>
+            </dl>
+        </div>
+        <div class="hidden p-4 bg-gray-50 rounded-lg md:p-8 dark:bg-gray-800" id="about" role="tabpanel" aria-labelledby="about-tab">
+            <h2 class="mb-5 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">We invest in the Library's potential</h2>
+            <!-- List -->
+            <ul role="list" class="space-y-4 text-gray-500 dark:text-gray-400">
+                <li class="flex space-x-2 items-center">
+                    <svg class="flex-shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                    </svg>
+                    <span class="leading-tight">Make bookings</span>
+                </li>
+                <li class="flex space-x-2 items-center">
+                    <svg class="flex-shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                    </svg>
+                    <span class="leading-tight">Find Libraries</span>
+                </li>
+                <li class="flex space-x-2 items-center">
+                    <svg class="flex-shrink-0 w-3.5 h-3.5 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                    </svg>
+                    <span class="leading-tight">Check seat occupancy</span>
+                </li>
+            </ul>
+        </div>
+        <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+            <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+                <h2 id="accordion-flush-heading-1">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+                    <span>What is Kiasu Library?</span>
+                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                    </svg>
+                    </button>
+                </h2>
+                <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
+                    <div class="py-5 border-b border-gray-50 dark:border-gray-700">
+                    <p class="mb-2 text-gray-500 dark:text-gray-400">Kiasu Library is a library seat booking system.</p>
+                    <p class="text-gray-500 dark:text-gray-400"> <a href="about.php" class="text-blue-600 dark:text-blue-500 hover:underline">CLick Here</a> to find out more about us.</p>
+                    </div>
+                </div>
+                <h2 id="accordion-flush-heading-2">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+                    <span>How can I book a seat?</span>
+                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                    </svg>
+                    </button>
+                </h2>
+                <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
+                    <div class="py-5 border-b border-gray-50 dark:border-gray-700">
+                    <p class="mb-2 text-gray-500 dark:text-gray-400">You can book a seat by clicking BOOKINGS on the navigation bar or</p>
+                    <p class="text-gray-500 dark:text-gray-400"><a href="bookings.php" class="text-blue-600 dark:text-blue-500 hover:underline">Click here</a> to make a booking</p>
+                    </div>
+                </div>
+                <h2 id="accordion-flush-heading-3">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
+                    <span>Can I cancel my booking?</span>
+                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                    </svg>
+                    </button>
+                </h2>
+                <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
+                    <div class="py-5 border-b border-gray-50 dark:border-gray-700">
+                    <p class="mb-2 text-gray-500 dark:text-gray-400">Yes you can! You can cancel you booking by logging into your account and click existing bookings. You will see the beside every booking there is a delete button. </p>
+                    <p class="mb-2 text-gray-500 dark:text-gray-400">You can cancel your booking by clicking that button.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    
     
 <div  class="chat-box">
   <div class="chat-box-header">
@@ -178,56 +305,54 @@ if($email != false && $password != false){
             window.location.href = "library_finder.php";
     }
 </script>
-<div class="mt-10 mx-auto" style="max-width: 1350px; margin-left: 170px; background-color: lightskyblue; color: white; padding: 10px; text-align: center;">
+
+
+
+
+<div class="mt-10" style="max-width: 1350px; margin-left: 10%; margin-right: 10%; background-color: lightskyblue; color: white; padding: 10px; text-align: center;">
         <h1 style="margin: 0; font-size: 30px; font-weight: bold;">The "Librarians"</h1>
 </div>
-<div class="flex flex-col md:flex-row mt-5 md:pl-70" style="margin-left: auto; margin-right: auto; margin-top: 20px; margin-left: 170px;" margin-right: 100px;>
-  <!-- Card 1 -->
-  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 md:mr-4 mb-4 md:mb-0">
-    <a href="#">
-      <img class="rounded-t-lg" src="Resources/gremlin1.png" alt="gremlin1" />
-    </a>
-    <div class="p-5">
-      <a href="#">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Chester Yong</h5>
-      </a>
-      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The "Database Master". Handles most of our required databases and tabs.</p>
-      </a>
+<div class="flex flex-col md:flex-row mt-5 md:pl-70" style="margin-left: 10%; margin-right: 10%; margin-top: 20px; " margin-right: 100px;>
+  <!-- Card 1  -->
+  <div class="w-full max-w-md bg-blue-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-3 my-4">
+    <div class="flex justify-end px-5 pt-5">   
     </div>
-  </div>
+    <div class="flex flex-col items-center pb-10">
+        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="Resources/gremlin1.png" alt="gremlin1"/>
+        <h4 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Chester Yong</h4>
+        <span class="text-md text-gray-500 dark:text-gray-400 text-center">The "Database Master". Handles most of our required databases and tabs.</span>
+        
+    </div>
+</div>
 
   <!-- Card 2 -->
-  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 md:mr-4 mb-4 md:mb-0">
-    <a href="#">
-      <img class="rounded-t-lg" src="Resources/gremlin2.jpg" alt="gremlin2" />
-    </a>
-    <div class="p-5">
-      <a href="#">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Nicholas Lee</h5>
-      </a>
-      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The "Designer" and the person in charge of media.</p>
-      </a>
+  <div class="w-full max-w-md bg-blue-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-3 my-4">
+    <div class="flex justify-end px-5 pt-5">   
     </div>
-  </div>
+    <div class="flex flex-col items-center pb-10">
+        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="Resources/gremlin2.jpg" alt="gremlin2"/>
+        <h4 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Nicholas Lee</h4>
+        <span class="text-md text-gray-500 dark:text-gray-400 text-center">The "Designer" and the person in charge of media.</span>
+        
+    </div>
+</div>
 
   <!-- Card 3 -->
-  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <a href="#">
-      <img class="rounded-t-lg" src="Resources/gremlin3.jpg" alt="gremlin3" />
-    </a>
-    <div class="p-5">
-      <a href="#">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Bryan Lim</h5>
-      </a>
-      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The leader of the three. Handles the rest of what is required and needed to be done.</p>
-      </a>
+  <div class="w-full max-w-md bg-blue-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-3 my-4">
+    <div class="flex justify-end px-5 pt-5">   
     </div>
-  </div>
+    <div class="flex flex-col items-center pb-10">
+        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="Resources/gremlin3.jpg" alt="gremlin3"/>
+        <h4 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bryan Lim</h4>
+        <span class="text-md text-gray-500 dark:text-gray-400 text-center">The leader of the three. Handles the rest of what is required and needed to be done.</span>
+        
+    </div>
+</div>
 </div>
 
 
 
-<footer class="mt-10 mb-0 p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800" style="background-color: cyan;">
+<footer class="mt-10 mb-0 p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800" style="background-color: lightskyblue;">
   <div class="mx-auto max-w-screen-xl text-center" >
       <a href="home.php" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
           <img class="mr-2 h-8" src="Resources/logo-no-background.png" alt="logo">
@@ -239,22 +364,13 @@ if($email != false && $password != false){
               <a href="about.php" class="mr-4 hover:underline md:mr-6 ">About</a>
           </li>
           <li>
-              <a href="feedbackloggedin.php" class="mr-4 hover:underline md:mr-6">Feedback</a>
+              <a href="feedback.php" class="mr-4 hover:underline md:mr-6">Feedback</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6 ">Campaigns</a>
+              <a href="bookings.php" class="mr-4 hover:underline md:mr-6">Book now</a>
           </li>
           <li>
-              <a href="bookingsloggedinnew.php" class="mr-4 hover:underline md:mr-6">Book now</a>
-          </li>
-          <li>
-              <a href="library_finderloggedin.php" class="mr-4 hover:underline md:mr-6">Find us</a>
-          </li>
-          <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6">FAQs</a>
-          </li>
-          <li>
-              <p class="mr-4 md:mr-6">Contact</p>
+              <a href="library_finder.php" class="mr-4 hover:underline md:mr-6">Find us</a>
           </li>
       </ul>
       <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022-2023 <a href="#" class="hover:underline">Kiasu Library™</a>. All Rights Reserved.</span>
