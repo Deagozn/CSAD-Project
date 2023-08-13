@@ -22,7 +22,7 @@ if($email != false && $password != false){
 }
 ?>
 <?php
-if (isset($_POST['deletebooking'])) {
+if (isset($_POST['deletebookingadmin'])) {
     $servername2 = "localhost";
     $username2 = "root";
     $password2 = "";
@@ -53,7 +53,7 @@ if (isset($_POST['deletebooking'])) {
 
         if ($result2) {
             // Successfully deleted the booking from reservations table
-            header("Location: bookingsloggedinexisting.php"); // Redirect to the table view page after deletion
+            header("Location: bookingsadmin.php"); // Redirect to the table view page after deletion
             exit();
         } else {
             // Handle the deletion error for reservations table
@@ -200,6 +200,7 @@ if ($result3->num_rows > 0) {
     ?>
     <table class="mx-auto">
         <tr style="border:2px solid black;">
+            <td style="border:2px solid black; padding: 5px">User Id</td>
             <td style="border:2px solid black; padding: 5px">Time Booked</td>
             <td style="border:2px solid black; padding: 5px">Library</td>
             <td style="border:2px solid black; padding: 5px">Date</td>
@@ -209,6 +210,7 @@ if ($result3->num_rows > 0) {
             <td style="border:2px solid black; padding: 8px">Delete</td>
         </tr><?php foreach (array_reverse($row3) as $row4) {?>
         <tr style="border:2px solid black;">
+        <td style="border:2px solid black; padding: 5px"><?php echo $row4['id']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['create_time']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['library']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['date']?></td>
@@ -216,10 +218,10 @@ if ($result3->num_rows > 0) {
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['seatnumber']?></td>
         <td style="border:2px solid black; padding: 5px"><?php echo $row4['books']?></td>
         <td style="border:2px solid black; padding: 8px">
-            <form action="bookingsloggedinexisting.php" method="POST">
+            <form action="bookingsadmin.php" method="POST">
                 <input type="hidden" name="booking_id" value="<?php echo $row4['booking_id']; ?>">
                 <input type="hidden" name="seatno" value="<?php echo $row4['seatnumber']; ?>">
-                <input name="deletebooking" type="submit" class="cursor-pointer form-control button w-full bg-red-500 hover:bg-blue-600 text-white font-medium py-3 px-3 rounded" value="Delete">
+                <input name="deletebookingadmin" type="submit" class="cursor-pointer form-control button w-full bg-red-500 hover:bg-blue-600 text-white font-medium py-3 px-3 rounded" value="Delete">
             </form>
         </td>
         </tr>
