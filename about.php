@@ -55,7 +55,7 @@
   </div>
 </nav>
 
-<!-- Centered container test -->
+<!-- Centered container-->
 <div class="flex justify-center h-screen mt-4 bg-opacity-50 bg-white">
   <!-- Content -->
   <div class="w-full max-w-md block rounded-lg bg-transparent shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
