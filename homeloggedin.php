@@ -89,6 +89,15 @@ if($email != false && $password != false){
     </div>  
   </div>
 </nav>
+<div class="flex justify-center items-center mt-10 mx-auto max-w-5xl p-4">
+        <!-- Centered YouTube Video -->
+        <div class="rounded-lg shadow-lg p-6" style="background-color: steelblue; margin-left: 0px;">
+            <h1 class="text-xl font-semibold mb-4 text-center"></h1>
+            <div class="aspect-w-16 aspect-h-9 flex items-center justify-center" style="">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/7_9U7jyEOyI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 <div class="flex justify-center items-center h-40 mt-4">
     <a href="#" class="flex flex-col items-center bg-blue-400 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl relative" style="min-width: 80%;">
         <img class="object-fill w-full h-64 md:h-auto md:w-64 md:rounded-none md:rounded-l-lg" src="Resources/image.png" alt="">
@@ -115,7 +124,7 @@ if($email != false && $password != false){
             </button>
         </div>
     </a>
-</div>
+</div>    
     
 <div  class="chat-box">
   <div class="chat-box-header">
@@ -146,8 +155,7 @@ if($email != false && $password != false){
             <span class="modal-close-button">&times;</span>
             <h1>Add What you want here.</h1>
         </div>
-    </div>    
-
+    </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -164,14 +172,63 @@ if($email != false && $password != false){
         else {
             window.location.href = "bookingsloggedinnew.php";
         }
-        
-        function redirectTofinder() {
+    }
+    
+    function redirectTofinder() {
             window.location.href = "library_finder.php";
     }
-    }
 </script>
-<footer class="mt-10 mb-0 p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
-  <div class="mx-auto max-w-screen-xl text-center">
+<div class="mt-10 mx-auto" style="max-width: 1350px; margin-left: 170px; background-color: lightskyblue; color: white; padding: 10px; text-align: center;">
+        <h1 style="margin: 0; font-size: 30px; font-weight: bold;">The "Librarians"</h1>
+</div>
+<div class="flex flex-col md:flex-row mt-5 md:pl-70" style="margin-left: auto; margin-right: auto; margin-top: 20px; margin-left: 170px;" margin-right: 100px;>
+  <!-- Card 1 -->
+  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 md:mr-4 mb-4 md:mb-0">
+    <a href="#">
+      <img class="rounded-t-lg" src="Resources/gremlin1.png" alt="gremlin1" />
+    </a>
+    <div class="p-5">
+      <a href="#">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Chester Yong</h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The "Database Master". Handles most of our required databases and tabs.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 md:mr-4 mb-4 md:mb-0">
+    <a href="#">
+      <img class="rounded-t-lg" src="Resources/gremlin2.jpg" alt="gremlin2" />
+    </a>
+    <div class="p-5">
+      <a href="#">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Nicholas Lee</h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The "Designer" and the person in charge of media.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+      <img class="rounded-t-lg" src="Resources/gremlin3.jpg" alt="gremlin3" />
+    </a>
+    <div class="p-5">
+      <a href="#">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Bryan Lim</h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">The leader of the three. Handles the rest of what is required and needed to be done.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+<footer class="mt-10 mb-0 p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800" style="background-color: cyan;">
+  <div class="mx-auto max-w-screen-xl text-center" >
       <a href="home.php" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
           <img class="mr-2 h-8" src="Resources/logo-no-background.png" alt="logo">
           Kiasu Library    
@@ -179,7 +236,7 @@ if($email != false && $password != false){
       <p class="my-6 text-gray-500 dark:text-gray-400">A library-goer's best friend.</p>
       <ul class="flex flex-wrap justify-center items-center mb-10 text-gray-900 dark:text-white">
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+              <a href="about.php" class="mr-4 hover:underline md:mr-6 ">About</a>
           </li>
           <li>
               <a href="feedbackloggedin.php" class="mr-4 hover:underline md:mr-6">Feedback</a>
